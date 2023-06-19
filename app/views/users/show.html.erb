@@ -1,0 +1,12 @@
+<% if @user %>
+  <p>
+    <strong>ユーザー名</strong>
+    <%= @user.name %>
+  </p>
+  <p>
+    <strong>e-mail</strong>
+    <%= @user.email %>
+  </p>
+<% else %>
+  <p>ユーザーが存在しません</p>
+<% end %>
