@@ -7,6 +7,9 @@
     <strong>e-mail</strong>
     <%= @user.email %>
   </p>
+ 
+  <%= link_to "編集する", edit_user_registration_path, class: "btn btn-lg btn-primary" %>
+  
 <% else %>
   <p>ユーザーが存在しません</p>
 <% end %>

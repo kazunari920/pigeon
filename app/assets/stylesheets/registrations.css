@@ -1,12 +1,86 @@
-.signup-heading  {
+.form_section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* 左揃えに変更 */
+    margin-bottom: 20px;
+    margin-left: 33%; /* 3分の1を左にずらす */
+  }
+  
+  .form_input_group {
+    max-width: 200px; /* ここは適切な幅に調整してください */
+    width: 100%;
+  }
+  
+  .form_label,
+  .form_input {
+    width: 100%;
+  }
+  
+  .form_section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* 左揃えに変更 */
+  margin-bottom: 20px;
+  margin-left: 33%; /* 3分の1を左にずらす */
+}
+
+.form_input_group {
+  max-width: 500px; /* ここは適切な幅に調整してください */
+  width: 100%;
+}
+
+.form_label,
+.form_input {
+  width: 100%;
+}
+
+.form_section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* 左揃えに変更 */
+    margin-bottom: 20px;
+    margin-left: 33%; /* 3分の1を左にずらす */
+  }
+  
+  .form_input_group {
+    max-width: 500px; /* ここは適切な幅に調整してください */
+    width: 100%;
+  }
+  
+  .form_label,
+  .form_input {
+    width: 100%;
+  }
+  
+  .form_section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* 左揃えに変更 */
+    margin-bottom: 20px;
+    margin-left: 33%; /* 3分の1を左にずらす */
+  }
+  
+  .form_input_group {
+    max-width: 300px; /* ここは適切な幅に調整してください */
+    width: 100%;
+  }
+  
+  .form_label,
+  .form_input {
+    width: 100%;
+  }
+  
+  .form_button {
+    color: white;
+    background-color: blue;
+    border: none;
+    padding: 10px 20px;
     text-align: center;
-
-}
-
-.form_center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-    
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
+  
