@@ -2,8 +2,8 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-  <div class="edit_field form_section">
-    <div class="edit_email form_row form_input_group">
+  <div class="form_section">
+    <div class="form_input_group">
       <%= f.label :email, class: "form_label" %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form_input" %>
     </div>
@@ -12,7 +12,7 @@
       <div>現在、次のメールアドレスの確認を待っています：<%= resource.unconfirmed_email %></div>
     <% end %>
 
-    <div class="edit_newpass form_row form_input_group">
+    <div class="form_input_group">
       <%= f.label :新しいパスワード, class: "form_label" %> <i>(空白では保存されません)</i><br />
       <%= f.password_field :password, autocomplete: "new-password", class: "form_input" %>
       <% if @minimum_password_length %>
@@ -21,12 +21,12 @@
       <% end %>
     </div>
 
-    <div class="edit_confirmpass form_row form_input_group">
+    <div class="form_input_group">
       <%= f.label :password_confirmation, class: "form_label" %><br />
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form_input" %>
     </div>
 
-    <div class="edit_usedpass form_row form_input_group">
+    <div class="form_input_group">
       <%= f.label :current_password, class: "form_label" %> <i>(現在のパスワード)</i><br />
       <%= f.password_field :current_password, autocomplete: "current-password", class: "form_input" %>
     </div>
@@ -35,12 +35,8 @@
   <div class="actions form_section">
     <%= f.submit "更新", class: "form_button" %>
   </div>
-  <% end %>
+<% end %>
 
-<div class="account_actions form_section">
-  アカウント削除 <%= button_to "アカウントの削除", registration_path(resource_name), data: { confirm: "本当によろしいですか？", turbo_confirm: "本当によろしいですか？" }, method: :delete, class: "form_button" %>
-</div>
-
-<div class="back_actions form_section">
-  <%= link_to "戻る", :back, class: "back_link" %>
+<div class="form_section">
+  <%= button_to "アカウントの削除", registration_path(resource_name), data: { confirm: "本当によろしいですか？", turbo_confirm: "本当によろしいですか？" }, method: :delete, class: "form_button" %>
 </div>
