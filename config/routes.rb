@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "/photo", to: "photo#show"
   get "/flow", to: "static_pages#flow"
 
-  resources :registrations, only: [:new, :create]
+  resources :registrations, only: [:new, :create, :edit, :update]
   resources :users, only: [:show, :index]
 
   get 'users/:id', to: 'users#show', as: 'user_show'
