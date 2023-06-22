@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :photographers
   get 'photo/show'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
