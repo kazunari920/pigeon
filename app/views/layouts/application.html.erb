@@ -11,9 +11,12 @@
 
   <body>
   <% if   user_signed_in? %>
-      <%= render 'shared/header' %>
-  <% else  %>
-      <%= render  'shared/guest_header'  %>
+    <%= render 'shared/header' %>
+  <% elsif photographer_signed_in? %>
+    <%= render 'shared/header' %>
+  <% else %>
+    <%= render  'shared/guest_header'  %>
+
    <% end %>
       <%= yield %>
   </body>

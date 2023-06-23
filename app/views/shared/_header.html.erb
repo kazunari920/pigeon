@@ -7,9 +7,11 @@
         <li><%= link_to "探す",    "#" %></li>
         <li><%= link_to "写真をみる",    "#" %></li>
         <li><%= link_to "よくある質問",    help_path %></li>
-        <li><%= link_to "ユーザー", user_path(current_user) %>  </li>
-       <li> <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %> </li>
-
+        <%if user_signed_in?%>
+        <li> <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %> </li>
+        <%else%>
+        <li> <%= link_to 'ログアウト', destroy_photographer_session_path, method: :delete %> </li>
+        <%end%>
       </ul>
     </nav>
   </div>
