@@ -7,7 +7,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = users(:tanaka)
     @jpuser = users(:田中)
   end
-  
+
   test "登録ページにアクセスできる" do
     get new_user_registration_path
     assert_response :success

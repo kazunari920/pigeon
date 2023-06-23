@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-  
+
     if @user.nil?
 
     else
@@ -11,8 +11,8 @@ class UsersController < ApplicationController
       # 例: ユーザーの詳細情報を表示する
     end
   end
-  
-  
+
+
   private
 
     def user_params
