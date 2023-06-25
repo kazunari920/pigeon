@@ -29,8 +29,7 @@ gem "jbuilder"
 
 gem 'devise'
 
-gem 'solargraph', '~> 0.38.0'
-gem 'rufo', '~> 0.16.1'
+
 
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
