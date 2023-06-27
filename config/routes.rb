@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get "/flow", to: "static_pages#flow"
   get 'photo/show'
 
+  #開発環境でのメール確認用
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   get 'users/:id', to: 'users#show', as: 'user'
   get 'photographers/:id', to: 'photographers#show', as:'photographer'
 
