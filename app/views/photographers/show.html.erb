@@ -8,7 +8,16 @@
     <%= @photographer.email %>
   </p>
 
-  <%= link_to "編集する", edit_photographer_registration_path, class: "btn btn-lg btn-primary" %>
+  <p>
+  <strong>自己紹介:</strong>
+  <%= @photographer.description %>
+</p>
+
+  <%= link_to "アカウント編集", edit_photographer_registration_path, class: "btn btn-lg btn-primary" %>
+
+<p>
+  <%= link_to 'マイページ編集', edit_photographer_path(@photographer) %>
+</p>
 
 <% else %>
   <p>ユーザーが存在しません</p>
