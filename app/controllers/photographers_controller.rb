@@ -23,9 +23,10 @@ class PhotographersController < ApplicationController
     if params[:search].present?
       @photographers = Photographer.where("name LIKE ?", "%#{params[:search]}%")
     else
-      @photographers = Photographer.all
+      @photographers = nil
     end
   end
+
 
   private
 

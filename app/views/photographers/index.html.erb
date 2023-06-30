@@ -4,10 +4,12 @@
   <%= submit_tag "検索", name: nil %>
 <% end %>
 
-<ul>
-  <% @photographers.each do |photographer| %>
-    <li>
-      <%= link_to photographer.name, photographer_path(photographer) %>
-    </li>
-  <% end %>
-</ul>
+<% if @photographers.present? %>
+  <ul>
+    <% @photographers.each do |photographer| %>
+      <li>
+        <%= link_to photographer.name, photographer_path(photographer) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
