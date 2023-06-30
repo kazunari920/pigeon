@@ -18,6 +18,14 @@ class PhotographersController < ApplicationController
     end
   end
 
+  def index
+    if params[:search].present?
+      @photographers = Photographer.where("name LIKE ?", "%#{params[:search]}%")
+    else
+      @photographers = Photographer.all
+    end
+  end
+
   private
 
     def photographer_params

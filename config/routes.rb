@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get "/flow", to: "static_pages#flow"
   get 'photo/show'
 
-  resources :photographers, only: [:edit, :update]
+  resources :photographers, only: [:edit, :update, :index]
 
   #開発環境でのメール確認用
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
