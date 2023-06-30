@@ -28,8 +28,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem 'devise'
-
-
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
 
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
