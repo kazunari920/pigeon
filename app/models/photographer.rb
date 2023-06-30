@@ -4,10 +4,11 @@ class Photographer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  validates :name,length: { maximum: 30 }  #,presence: true
+  validates :name,length: { maximum: 30 }, presence: true
 
   #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, length: { maximum: 255 } #,presence: true,
+  validates :email, length: { maximum: 255 }, uniqueness: true
+   #,presence: true,
   #format: { with: VALID_EMAIL_REGEX },
-  #uniqueness: true
+
 end
