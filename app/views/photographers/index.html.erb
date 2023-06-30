@@ -7,9 +7,9 @@
 <% if @photographers.present? %>
   <ul>
     <% @photographers.each do |photographer| %>
-      <li>
+      <ul>
         <%= link_to photographer.name, photographer_path(photographer) %>
-      </li>
+      </ul>
     <% end %>
   </ul>
 <% end %>
