@@ -21,11 +21,12 @@ class PhotographersController < ApplicationController
 
   def index
     if params[:search].present?
-      @photographers = Photographer.where("name LIKE ?", "%#{params[:search]}%")
+      @photographers = Photographer.where("name LIKE ?", "%#{params[:search]}%").page(params[:page]).per(20)
     else
-      @photographers = nil
+      @photographers = Photographer.none
     end
   end
+
 
 
   private
