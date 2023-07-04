@@ -38,7 +38,7 @@ RSpec.describe User, type: :model do
 
     context 'メールアドレスが256文字以上の場合' do
       it 'ユーザー新規登録が失敗すること' do
-        user.email = 'a' * 244 + '@example.com'
+        user.email = "#{'a' * 244}@example.com"
         expect(user).to_not be_valid
         expect(user.errors.details[:email][0][:error]).to eq :too_long
       end
