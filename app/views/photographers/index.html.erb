@@ -1,0 +1,17 @@
+<%= form_with(url: photographers_path, method: :get, local: true) do %>
+  <%= label_tag :search, "検索" %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "検索", name: nil %>
+<% end %>
+
+<% if @photographers.present? %>
+  <ul>
+    <% @photographers.each do |photographer| %>
+      <ul>
+        <%= link_to photographer.name, photographer_path(photographer) %>
+      </ul>
+    <% end %>
+  </ul>
+
+  <%= paginate @photographers %>
+<% end %>
