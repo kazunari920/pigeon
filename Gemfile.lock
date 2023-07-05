@@ -142,6 +142,8 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.15.2-aarch64-linux)
       racc (~> 1.4)
+    nokogiri (1.15.2-arm64-darwin)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     public_suffix (5.0.1)
     puma (5.6.5)
@@ -230,6 +232,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  arm64-darwin-22
 
 DEPENDENCIES
   bcrypt
@@ -255,4 +258,4 @@ RUBY VERSION
    ruby 3.0.6p216
 
 BUNDLED WITH
-   2.4.14
+   2.3.14
