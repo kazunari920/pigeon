@@ -1,0 +1,25 @@
+<% if @photographer %>
+  <p>
+    <strong>ユーザー名</strong>
+    <%= @photographer.name %>
+  </p>
+  <p>
+    <strong>e-mail</strong>
+    <%= @photographer.email %>
+  </p>
+
+  <p>
+  <strong>自己紹介:</strong>
+  <%= @photographer.description %>
+</p>
+
+<% if photographer_signed_in? && current_photographer == @photographer %>
+  <%= link_to 'アカウント編集', edit_registration_path(@photographer) %>
+  <p><%= link_to 'マイページ編集', edit_photographer_path(@photographer) %></p>
+
+<% end %>
+
+
+<% else %>
+  <p>ユーザーが存在しません</p>
+<% end %>

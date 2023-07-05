@@ -1,0 +1,48 @@
+@import "bootstrap-sprockets";
+
+$headings-font-family: 'Great Vibes', cursive;
+
+
+@import "bootstrap";
+
+.form_section {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* 縦方向にも中央揃え */
+    margin: 0 auto;
+    width: 50%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.form_input_group {
+    width: 100%;
+}
+
+.form_label,
+.form_input {
+    width: 100%;
+    text-align: left; /* 左寄せに修正 */
+}
+
+.form_button {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: block; /* ボタンをブロック要素に変更 */
+    width: 100%; /* ボタンを親要素いっぱいに広げる */
+    font-size: 16px;
+    margin: 4px 0; /* マージンを上下に設定 */
+    cursor: pointer;
+}
+
+.actions {
+    margin-bottom: 40px; /* 登録ボタンの下にスペースを作成 */
+}
+
+.login_link {
+  margin-top: 20px; /* ログインリンクを登録ボタンから少し離す */
+}
