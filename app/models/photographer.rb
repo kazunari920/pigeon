@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Photographer < ApplicationRecord
+  has_many_attached :images
+  has_many :portfolios
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
