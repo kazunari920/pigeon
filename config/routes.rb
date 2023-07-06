@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     sessions: 'photographers/sessions',
     registrations: 'photographers/registrations'
   }
+  resources :photographers do
+    resources :portfolios
+  end
 
   root 'static_pages#home'
   get '/help', to: 'static_pages#help'
