@@ -10,8 +10,8 @@ amazon:
   service: S3
   access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
-  region: ap-northeast-3 # リージョンは適宜変更してください
-  bucket: pigeon-portfolio # バケット名は適宜変更してください
+  region: ap-northeast-3
+  bucket: pigeon-portfolio
 
 
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)

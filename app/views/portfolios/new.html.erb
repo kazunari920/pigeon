@@ -1,0 +1,10 @@
+<%= form_with(model: [@photographer, @portfolio], local: true) do |form| %>
+  <p>
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
