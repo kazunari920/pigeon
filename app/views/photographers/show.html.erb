@@ -22,8 +22,8 @@
 <% if photographer_signed_in? && current_photographer == @photographer %>
   <%= link_to 'アカウント編集', edit_registration_path(@photographer) %>
   <p><%= link_to 'マイページ編集', edit_photographer_path(@photographer) %></p>
-<%= link_to 'ポートフォリオを編集', new_photographer_portfolio_path(@photographer) %>
-
+<%= link_to 'ポートフォリオを追加', new_photographer_portfolio_path(@photographer) %>
+<%= link_to 'Delete Portfolios', destroy_form_photographer_portfolios_path(@photographer), method: :get %>
 <% end %>
 
 

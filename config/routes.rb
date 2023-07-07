@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+
   get 'photographers/show'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -11,9 +12,17 @@ Rails.application.routes.draw do
     sessions: 'photographers/sessions',
     registrations: 'photographers/registrations'
   }
+
   resources :photographers do
-    resources :portfolios
+    resources :portfolios, only: [:new, :create, :index, :show, :destroy] do
+      collection do
+        get 'destroy_form'
+        delete 'destroy_multiple'
+      end
+    end
   end
+
+
 
   root 'static_pages#home'
   get '/help', to: 'static_pages#help'

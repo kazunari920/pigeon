@@ -37,6 +37,9 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
 
+  # 画像の変換にminimagickを使う
+  config.active_storage.variant_processor = :mini_magick
+  # AWS S3を使う
   config.active_storage.service = :amazon
 
   # Don't care if the mailer can't send.

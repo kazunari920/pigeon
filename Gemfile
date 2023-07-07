@@ -32,6 +32,9 @@ gem 'jbuilder'
 gem 'devise'
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
 gem 'aws-sdk-s3'
+
+gem "image_processing", ">= 1.2"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
