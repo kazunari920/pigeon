@@ -13,6 +13,12 @@
   <%= @photographer.description %>
 </p>
 
+<% @photographer.portfolios.each do |portfolio| %>
+  <% portfolio.images.each do |image| %>
+    <%= image_tag image, class: "img-responsive" %>
+  <% end %>
+<% end %>
+
 <% if photographer_signed_in? && current_photographer == @photographer %>
   <%= link_to 'アカウント編集', edit_registration_path(@photographer) %>
   <p><%= link_to 'マイページ編集', edit_photographer_path(@photographer) %></p>
