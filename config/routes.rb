@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   get 'photographers/show'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    confirmations: 'users/confirmations'
   }
 
   devise_for :photographers, controllers: {
     sessions: 'photographers/sessions',
-    registrations: 'photographers/registrations'
+    registrations: 'photographers/registrations',
+    confirmations: 'photographers/confirmations' 
   }
 
   resources :photographers do
