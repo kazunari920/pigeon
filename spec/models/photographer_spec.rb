@@ -38,7 +38,7 @@ RSpec.describe Photographer, type: :model do
 
     context 'メールアドレスが256文字以上の場合' do
       it 'フォトグラファー新規登録が失敗すること' do
-        photographer.email = 'a' * 244 + '@example.com'
+        photographer.email = "#{'a' * 244}@example.com"
         expect(photographer).to_not be_valid
         expect(photographer.errors.details[:email][0][:error]).to eq :too_long
       end

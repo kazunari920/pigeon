@@ -1,6 +1,6 @@
 FROM ruby:3.0.6
 
-RUN apt-get update -qq && apt-get install -y nodejs default-mysql-client
+RUN apt-get update -qq && apt-get install -y nodejs default-mysql-client imagemagick
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
@@ -19,3 +19,5 @@ COPY . /pigeon
 EXPOSE 3000
 
 CMD ["rails", "server", "-b", "0.0.0.0"]
+
+

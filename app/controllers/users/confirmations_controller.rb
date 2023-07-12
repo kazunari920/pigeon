@@ -7,16 +7,23 @@ module Users
     #   super
     # end
 
-    # POST /resource/confirmation
-    # def create
-    #   super
-    # end
 
-    # GET /resource/confirmation?confirmation_token=abcdef
-    # def show
-    #   super
-    # end
+    def create
+      super do |resource|
+        if successfully_sent?(resource)
+          flash[:notice] = '確認メールが送信されました。'
+        end
+      end
+    end
 
+
+    def show
+      super do |resource|
+        if resource.errors.empty?
+          sign_in(resource)
+        end
+      end
+    end
     # protected
 
     # The path used after resending confirmation instructions.

@@ -32,10 +32,10 @@ $headings-font-family: 'Great Vibes', cursive;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: block; /* ボタンをブロック要素に変更 */
-    width: 100%; /* ボタンを親要素いっぱいに広げる */
+    display: block;
+    width: 100%;
     font-size: 16px;
-    margin: 4px 0; /* マージンを上下に設定 */
+    margin: 4px 0;
     cursor: pointer;
 }
 

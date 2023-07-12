@@ -1,8 +1,12 @@
 require:
   - rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'Gemfile.lock'
+
 Style/Documentation:
   Enabled: false
-
 
 Style/AsciiComments:
   Enabled: false

@@ -36,7 +36,11 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+
+  # 画像の変換にminimagickを使う
+  config.active_storage.variant_processor = :mini_magick
+  # AWS S3を使う
+  config.active_storage.service = :amazon
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
