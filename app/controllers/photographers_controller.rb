@@ -36,9 +36,9 @@ class PhotographersController < ApplicationController
   end
 
   def authenticate_photographer!
-    unless photographer_signed_in?
-      redirect_to new_photographer_session_path, alert: 'Please sign in to access this page.'
-    end
+    return if photographer_signed_in?
+
+    redirect_to new_photographer_session_path, alert: 'Please sign in to access this page.'
   end
 
   def correct_photographer

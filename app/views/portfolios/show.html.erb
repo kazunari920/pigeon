@@ -1,0 +1,10 @@
+<h1><%= @photographer.name %>'s Portfolio</h1>
+
+<div>
+  <h2><%= @portfolio.title %></h2>
+  <p><%= @portfolio.description %></p>
+
+  <% @portfolio.images.each do |image| %>
+    <%= image_tag image %>
+  <% end %>
+</div>

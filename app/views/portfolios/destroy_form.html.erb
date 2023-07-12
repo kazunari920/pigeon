@@ -1,0 +1,12 @@
+<%= form_with url: destroy_multiple_photographer_portfolios_path(@photographer), method: :delete do %>
+  <% @portfolios.each do |portfolio| %>
+    <%= check_box_tag 'ids[]', portfolio.id %>
+    <% if portfolio.images.attached? %>
+      <%= image_tag url_for(portfolio.images.first.variant(resize: '100x100')) %>
+    <% end %>
+    <%= label_tag "portfolio_#{portfolio.id}", portfolio.id %>
+    <br>
+  <% end %>
+
+  <%= submit_tag 'Delete selected portfolios' %>
+<% end %>
