@@ -4,6 +4,10 @@ class Photographer < ApplicationRecord
   has_many :portfolios
   acts_as_taggable
 
+  def self.search_by_tag(tag)
+    Photographer.tagged_with(tag)
+  end
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

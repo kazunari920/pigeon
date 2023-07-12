@@ -12,7 +12,11 @@
   <strong>自己紹介:</strong>
   <%= @photographer.description %>
 </p>
-
+<h3>タグ</h3>
+<% @photographer.tags.each do |tag| %>
+  <%= link_to tag.name, photographers_path(tag: tag.name) %>
+<% end %>
+<br />
 <% @photographer.portfolios.each do |portfolio| %>
   <% portfolio.images.each do |image| %>
     <%= image_tag image, class: "img-responsive" %>
