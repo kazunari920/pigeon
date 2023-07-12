@@ -32,7 +32,7 @@ class PhotographersController < ApplicationController
   private
 
   def photographer_params
-    params.require(:photographer).permit(:name, :description, :email)
+    params.require(:photographer).permit(:name, :description, :email, :your, :other, :attributes, :tag_list)
   end
 
   def authenticate_photographer!

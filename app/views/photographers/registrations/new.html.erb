@@ -25,6 +25,11 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
+<br />
+  <div>
+  <%= f.label :tag_list, "Your tags" %><br />
+  <%= f.text_field :tag_list, value: @photographer.tag_list.to_s %>
+  </div>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

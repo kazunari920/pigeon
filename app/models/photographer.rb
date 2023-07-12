@@ -2,6 +2,7 @@
 
 class Photographer < ApplicationRecord
   has_many :portfolios
+  acts_as_taggable
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
