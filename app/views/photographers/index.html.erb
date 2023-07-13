@@ -1,6 +1,6 @@
 <%= form_with(url: photographers_path, method: :get, local: true) do %>
   <%= label_tag :search, "名前で検索" %>
-  <%= text_field_tag :search, params[:search] %>
+  <%= text_field_tag :search, params[:search] %>&emsp;
   <%= label_tag :tag, "タグで検索" %>
   <%= text_field_tag :tag, params[:tag] %>
   <%= submit_tag "検索", name: nil %>

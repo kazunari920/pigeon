@@ -19,6 +19,11 @@
   <%= f.text_area :description %>
 </div>
 
+<br />
+  <div>
+  <%= f.label :tag_list, "タグ" %><br />
+  <%= f.text_field :tag_list, value: @photographer.tag_list.to_s %>
+  </div>
 
 
 
