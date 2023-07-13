@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require "active_storage/engine"
+
+require 'active_storage/engine'
 require_relative 'boot'
 
 require 'rails/all'
@@ -7,9 +8,6 @@ require 'rails/all'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
-
-
 
 module Pigeon
   class Application < Rails::Application

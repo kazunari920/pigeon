@@ -7,21 +7,15 @@ module Users
     #   super
     # end
 
-
     def create
       super do |resource|
-        if successfully_sent?(resource)
-          flash[:notice] = '確認メールが送信されました。'
-        end
+        flash[:notice] = '確認メールが送信されました。' if successfully_sent?(resource)
       end
     end
 
-
     def show
       super do |resource|
-        if resource.errors.empty?
-          sign_in(resource)
-        end
+        sign_in(resource) if resource.errors.empty?
       end
     end
     # protected

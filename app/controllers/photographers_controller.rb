@@ -22,16 +22,15 @@ class PhotographersController < ApplicationController
   end
 
   def index
-    if params[:search].present?
-      @photographers = Photographer.where('name LIKE ?', "%#{params[:search]}%").page(params[:page]).per(20)
-    elsif params[:tag].present?
-      @photographers = Photographer.tagged_with(params[:tag]).page(params[:page]).per(20)
-    else
-      @photographers = Photographer.none
-    end
+    @photographers = if params[:search].present?
+                       Photographer.where('name LIKE ?', "%#{params[:search]}%").page(params[:page]).per(20)
+                     elsif params[:tag].present?
+                       Photographer.tagged_with(params[:tag]).page(params[:page]).per(20)
+                     else
+                       Photographer.none
+                     end
     @example_tags = %w[洋装 和装 チャペル 神社 前撮り] # 検索フォームの下に表示するタグ
   end
-
 
   private
 

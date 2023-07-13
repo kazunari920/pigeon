@@ -14,18 +14,14 @@ Rails.application.routes.draw do
   }
 
   resources :photographers do
-    resource :like, except: [:get, :index, :show]
-    resources :portfolios, only: [:new, :create, :index, :show, :destroy] do
+    resource :like, except: %i[get index show]
+    resources :portfolios, only: %i[new create index show destroy] do
       collection do
         get 'destroy_form'
         delete 'destroy_multiple'
       end
     end
   end
-
-
-
-
 
   root 'static_pages#home'
   get '/help', to: 'static_pages#help'
