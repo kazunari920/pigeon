@@ -12,18 +12,23 @@
   <strong>自己紹介:</strong>
   <%= @photographer.description %>
 </p>
+<h3>タグ</h3>
+<% @photographer.tags.each do |tag| %>
+  <%= link_to tag.name, photographers_path(tag: tag.name) %>
+<% end %>
 
+<br />
 <% @photographer.portfolios.each do |portfolio| %>
   <% portfolio.images.each do |image| %>
     <%= image_tag image, class: "img-responsive" %>
   <% end %>
 <% end %>
-
+<br />
 <% if photographer_signed_in? && current_photographer == @photographer %>
   <%= link_to 'アカウント編集', edit_registration_path(@photographer) %>
   <p><%= link_to 'マイページ編集', edit_photographer_path(@photographer) %></p>
-<%= link_to 'ポートフォリオを追加', new_photographer_portfolio_path(@photographer) %>
-<%= link_to 'Delete Portfolios', destroy_form_photographer_portfolios_path(@photographer), method: :get %>
+<%= link_to '写真を追加', new_photographer_portfolio_path(@photographer) %><br />
+<%= link_to '写真を削除', destroy_form_photographer_portfolios_path(@photographer), method: :get %>
 <% end %>
 
 

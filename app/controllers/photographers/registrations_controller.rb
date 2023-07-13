@@ -44,10 +44,10 @@ module Photographers
       devise_parameter_sanitizer.permit(:sign_up, keys: %i[name email password password_confirmation])
     end
 
-    # If you have extra params to permit, append them to the sanitizer.
-    # def configure_account_update_params
-    #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-    # end
+     #If you have extra params to permit, append them to the sanitizer.
+     def configure_account_update_params
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :password, :password_confirmation, :tag_list])
+     end
 
     # The path used after sign up.
     # def after_sign_up_path_for(resource)
