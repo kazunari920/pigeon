@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
-  get 'photographers/show'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
@@ -12,10 +10,11 @@ Rails.application.routes.draw do
   devise_for :photographers, controllers: {
     sessions: 'photographers/sessions',
     registrations: 'photographers/registrations',
-    confirmations: 'photographers/confirmations' 
+    confirmations: 'photographers/confirmations'
   }
 
   resources :photographers do
+    resource :like, except: [:get, :index, :show]
     resources :portfolios, only: [:new, :create, :index, :show, :destroy] do
       collection do
         get 'destroy_form'
@@ -23,6 +22,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+
 
 
 

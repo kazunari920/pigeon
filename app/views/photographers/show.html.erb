@@ -12,6 +12,16 @@
   <strong>自己紹介:</strong>
   <%= @photographer.description %>
 </p>
+</p>
+
+<% if current_user.liked?(@photographer) %>
+  <%= button_to 'いいね解除', photographer_like_path(@photographer), method: :delete, data: { confirm: '本当に解除しますか?' } %>
+<% else %>
+  <%= button_to 'いいね', photographer_like_path(@photographer), method: :post %>
+<% end %>
+
+
+
 <h3>タグ</h3>
 <% @photographer.tags.each do |tag| %>
   <%= link_to tag.name, photographers_path(tag: tag.name) %>
