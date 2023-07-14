@@ -55,3 +55,4 @@ production:
   database: pigeon_production
   username: <%= ENV["MYSQL_USER"] %>
   password: <%= ENV["PIGEON_DATABASE_PASSWORD"] %>
+  host: <%= ENV['DATABASE_HOST'] %>
