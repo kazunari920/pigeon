@@ -14,11 +14,12 @@
 </p>
 </p>
 
-<% if current_user.liked?(@photographer) %>
+<% if user_signed_in? && current_user.liked?(@photographer) %>
   <%= button_to 'いいね解除', photographer_like_path(@photographer), method: :delete, data: { confirm: '本当に解除しますか?' } %>
-<% else %>
+<% elsif user_signed_in? %>
   <%= button_to 'いいね', photographer_like_path(@photographer), method: :post %>
 <% end %>
+
 
 
 
