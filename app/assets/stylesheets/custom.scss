@@ -5,3 +5,17 @@ body {
   padding-top: 100px;
   text-align: center;
 }
+
+button.button-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+button.button-link:focus {
+  outline: none;
+}
+

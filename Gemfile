@@ -29,11 +29,11 @@ gem 'stimulus-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
+gem 'aws-sdk-s3'
 gem 'devise'
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
-gem 'aws-sdk-s3'
 
-gem "image_processing", ">= 1.2"
+gem 'image_processing', '>= 1.2'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
@@ -45,9 +45,9 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'bootsnap', require: false
 
 # Use Sass to process CSS
+gem 'acts-as-taggable-on', '~> 9.0', '>= 9.0.1'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
-gem 'acts-as-taggable-on', '~> 9.0', '>= 9.0.1'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

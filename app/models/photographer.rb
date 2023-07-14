@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Photographer < ApplicationRecord
+  has_many :likes
+  has_many :liked_users, through: :likes, source: :user
+
   has_many :portfolios
   acts_as_taggable
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_many :likes
+  has_many :liked_photographers, through: :likes, source: :photographer
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,4 +14,8 @@ class User < ApplicationRecord
   validates :email, length: { maximum: 255 }, uniqueness: true
   # presence: true,
   # format: { with: VALID_EMAIL_REGEX },
+
+  def liked?(photographer)
+    liked_photographers.exists?(photographer.id)
+  end
 end

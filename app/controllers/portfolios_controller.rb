@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PortfoliosController < ApplicationController
-  before_action :correct_photographer, only: [:destroy_multiple, :destroy_form]
+  before_action :correct_photographer, only: %i[destroy_multiple destroy_form]
 
   def new
     @photographer = Photographer.find(params[:photographer_id])
@@ -38,7 +40,6 @@ class PortfoliosController < ApplicationController
     redirect_to photographer_path(@photographer), notice: '画像の削除に成功しました'
   end
 
-
   private
 
   def portfolio_params
@@ -47,9 +48,8 @@ class PortfoliosController < ApplicationController
 
   def correct_photographer
     @photographer = Photographer.find(params[:photographer_id])
-    unless @photographer == current_photographer
-      redirect_to photographer_path(current_photographer)
-    end
-  end
+    return if @photographer == current_photographer
 
+    redirect_to photographer_path(current_photographer)
+  end
 end
