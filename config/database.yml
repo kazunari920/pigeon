@@ -30,4 +30,3 @@ test:
 production:
   <<: *default
   database: pigeon_production
-  url: <%= ENV['DATABASE_URL'] %>
