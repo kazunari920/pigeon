@@ -44,6 +44,10 @@ Rails.application.configure do
   config.active_storage.service = :amazon
   # 画像の変換にminimagickを使う
   config.active_storage.variant_processor = :mini_magick
+  # renderのホスト許可
+  config.hosts << ".onrender.com"
+  config.hosts << "pigeon-400z.onrender.com"
+
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
