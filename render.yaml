@@ -1,16 +1,16 @@
 services:
 - type: web
-  name: my-rails-app
+  name: Pigeon
   env: docker
   dockerfilePath: ./Dockerfile
-  buildCommand: docker build -t my-rails-app .
+  buildCommand: docker build -t pigeon .
   startCommand: bundle exec rails server -p 3000 -b 0.0.0.0
   envVars:
   - key: RAILS_ENV
     value: production
   - key: DATABASE_URL
     fromDatabase:
-      name: my-mysql-db
+      name: pigeon_production
       property: connectionString
   - key: RAILS_MAX_THREADS
     value: "5"
@@ -22,5 +22,5 @@ services:
     name: AWS_SECRET_ACCESS_KEY
 
 databases:
-- name: my-mysql-db
+- name: pigeon_production
   type: mysql
