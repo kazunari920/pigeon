@@ -24,8 +24,9 @@ test:
 
 production:
   <<: *default
-  database: AWS_RDS_DATABASE_NAME
-  username: AWS_RDS_USERNAME
-  password: AWS_RDS_PASSWORD
-  host: AWS_RDS_HOSTNAME
-  port: AWS_RDS_PORT
+  database: <%= ENV['AWS_RDS_DATABASE_NAME'] %>
+  username: <%= ENV['AWS_RDS_USERNAME'] %>
+  password: <%= ENV['AWS_RDS_PASSWORD'] %>
+  host: <%= ENV['AWS_RDS_HOSTNAME'] %>
+  port: <%= ENV['AWS_RDS_PORT'] %>
+
