@@ -13,11 +13,6 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: YOUR_AWS_RDS_USERNAME
-  password: YOUR_AWS_RDS_PASSWORD
-  host: YOUR_AWS_RDS_HOSTNAME
-  port: YOUR_AWS_RDS_PORT
-
 
 development:
   <<: *default
@@ -29,5 +24,8 @@ test:
 
 production:
   <<: *default
-  database: pigeon_production
-  database: YOUR_AWS_RDS_DATABASE_NAME
+  database: AWS_RDS_DATABASE_NAME
+  username: AWS_RDS_USERNAME
+  password: AWS_RDS_PASSWORD
+  host: AWS_RDS_HOSTNAME
+  port: AWS_RDS_PORT
