@@ -8,10 +8,11 @@ services:
     ports:
       - '3306:3306'
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      #ローカル環境
+      #MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      #MYSQL_DATABASE: ${MYSQL_DATABASE}
+      #MYSQL_USER: ${MYSQL_USER}
+      #MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     env_file:
       - .env
 
@@ -23,6 +24,14 @@ services:
       - gem_data:/usr/local/bundle
     ports:
       - "3000:3000"
+    environment:
+       #本番環境
+      RAILS_ENV: production
+      AWS_RDS_HOSTNAME: ${AWS_RDS_HOSTNAME}
+      AWS_RDS_PORT: ${AWS_RDS_PORT}
+      AWS_RDS_DATABASE_NAME: ${AWS_RDS_DATABASE_NAME}
+      AWS_RDS_USERNAME: ${AWS_RDS_USERNAME}
+      AWS_RDS_PASSWORD: ${AWS_RDS_PASSWORD}
     depends_on:
       - db
     env_file:
