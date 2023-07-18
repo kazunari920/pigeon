@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'messages/create'
+  get 'requests/new'
+  get 'requests/create'
+  get 'requests/show'
+  get 'requests/update'
+  get 'requests/accept'
+  get 'requests/decline'
+  get 'requests/complete'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
@@ -21,6 +29,10 @@ Rails.application.routes.draw do
         delete 'destroy_multiple'
       end
     end
+  end
+
+  resources :requests do
+    resources :messages, only: [:create]
   end
 
   root 'static_pages#home'
