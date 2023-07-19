@@ -32,6 +32,7 @@ gem 'jbuilder'
 gem 'aws-sdk-s3'
 gem 'devise'
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
+gem 'sendgrid-ruby', '~> 5.1'
 
 gem 'image_processing', '>= 1.2'
 
