@@ -1,2 +1,30 @@
-<h1>Requests#new</h1>
-<p>Find me in app/views/requests/new.html.erb</p>
+<h1>新規依頼</h1>
+
+<%= form_for [@photographer, @request] do |f| %>
+  <div>
+    <%= f.label :shooting_date, '撮影希望日' %><br />
+    <%= f.date_field :shooting_date %>
+  </div>
+  <div>
+    <%= f.label :shooting_location, '撮影希望地' %><br />
+    <%= f.text_field :shooting_location %>
+  </div>
+  <div>
+    <%= f.label :budget, '予算' %><br />
+    <%= f.number_field :budget %>
+  </div>
+  <div>
+    <%= f.label :comment, 'コメント（備考）' %><br />
+    <%= f.text_area :comment %>
+  </div>
+  <div>
+    <%= f.label :address, '住所' %><br />
+    <%= f.text_field :address %>
+  </div>
+  <div>
+    <%= f.label :phone_number, '電話番号' %><br />
+    <%= f.text_field :phone_number %>
+  </div>
+
+  <%= f.submit '依頼を送信' %>
+<% end %>

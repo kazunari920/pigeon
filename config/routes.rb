@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   resources :photographers do
     resource :like, except: %i[get index show]
+    resources :requests, only: [:new, :create]
     resources :portfolios, only: %i[new create index show destroy] do
       collection do
         get 'destroy_form'
@@ -30,6 +31,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :requests, only: [:show, :index]
 
   resources :requests do
     resources :messages, only: [:create]
