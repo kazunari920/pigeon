@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'messages/create'
+  get 'requests/new'
+  get 'requests/create'
+  get 'requests/show'
+  get 'requests/update'
+  get 'requests/accept'
+  get 'requests/decline'
+  get 'requests/complete'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
@@ -15,12 +23,19 @@ Rails.application.routes.draw do
 
   resources :photographers do
     resource :like, except: %i[get index show]
+    resources :requests, only: [:new, :create]
     resources :portfolios, only: %i[new create index show destroy] do
       collection do
         get 'destroy_form'
         delete 'destroy_multiple'
       end
     end
+  end
+
+  resources :requests, only: [:show, :index]
+
+  resources :requests do
+    resources :messages, only: [:create]
   end
 
   root 'static_pages#home'
