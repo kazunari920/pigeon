@@ -1,2 +1,27 @@
-<h1>Requests#show</h1>
-<p>Find me in app/views/requests/show.html.erb</p>
+<h1>リクエスト詳細</h1>
+
+<p>依頼者: <%= @request.user.name %></p>
+<p>ステータス: <%= @request.status %></p>
+
+<%= link_to '一覧に戻る', requests_path %>
+
+<% if @request.status == 'accepted' %>
+  <h2>メッセージ</h2>
+
+  <% @messages.each do |message| %>
+    <p>
+      <%= message.user.name %>: <%= message.body %>
+    </p>
+  <% end %>
+
+  <%= form_with(model: [ @request, @message ]) do |form| %>
+    <div class="field">
+      <%= form.label :body %>
+      <%= form.text_field :body %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'メッセージを送信' %>
+    </div>
+  <% end %>
+<% end %>

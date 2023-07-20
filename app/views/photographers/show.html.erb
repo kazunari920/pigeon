@@ -29,6 +29,13 @@
 <% end %>
 
 <br />
+
+<% if current_user %>
+  <%= link_to '撮影依頼をする', new_request_path(photographer_id: @photographer.id) %>
+<% else %>
+  <p>撮影依頼をするにはログインしてください。</p>
+<% end %>
+
 <% @photographer.portfolios.each do |portfolio| %>
   <% portfolio.images.each do |image| %>
     <%= image_tag image, class: "img-responsive" %>

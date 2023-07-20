@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   resources :requests do
     resources :messages, only: [:create]
+    get 'user_requests', on: :collection
   end
 
   root 'static_pages#home'

@@ -8,13 +8,15 @@ class RequestsController < ApplicationController
   def create
     @request = current_user.requests.build(request_params)
     if @request.save
-      redirect_to @request, notice: 'リクエストの作成に成功しました'
+      redirect_to user_requests_requests_path, notice: 'リクエストの作成に成功しました'
     else
       render :new
     end
   end
 
   def show
+    @messages = @request.messages.order(created_at: :asc)
+    @message = Message.new
   end
 
   def update
@@ -23,6 +25,14 @@ class RequestsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def index
+    @requests = current_photographer.requests
+  end
+
+  def user_requests
+    @requests = current_user.requests
   end
 
   def accept
@@ -47,6 +57,6 @@ class RequestsController < ApplicationController
       end
 
       def request_params
-        params.require(:request).permit(:photographer_id, :shooting_date, :shooting_location, :budget, :comment, :address, :phone_number)
+        params.require(:request).permit(:name, :photographer_id, :shooting_date, :shooting_location, :budget, :comment, :address, :phone_number)
       end
 end

@@ -1,0 +1,19 @@
+<% if @requests.empty? %>
+  <p>リクエストがありません</p>
+<% else %>
+  <% @requests.each do |request| %>
+    <p>
+      <strong>依頼者:</strong>
+      <%= request.user.name %>
+    </p>
+
+    <p>
+      <strong>ステータス:</strong>
+      <%= request.status %>
+    </p>
+
+    <%= link_to '詳細を見る', request_path(request) %>
+
+    <hr>
+  <% end %>
+<% end %>
