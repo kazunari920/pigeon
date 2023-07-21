@@ -1,14 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'messages/create'
-  get 'requests/new'
-  get 'requests/create'
-  get 'requests/show'
-  get 'requests/update'
-  get 'requests/accept'
-  get 'requests/decline'
-  get 'requests/complete'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
@@ -34,6 +26,11 @@ Rails.application.routes.draw do
   resources :requests do
     resources :messages, only: [:create]
     get 'user_requests', on: :collection
+    member do
+      post 'accept'
+      post 'decline'
+      post 'complete'
+    end
   end
 
   root 'static_pages#home'

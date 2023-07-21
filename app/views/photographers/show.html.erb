@@ -26,22 +26,26 @@
 <h3>タグ</h3>
 <% @photographer.tags.each do |tag| %>
   <%= link_to tag.name, photographers_path(tag: tag.name) %>
+
 <% end %>
 
 <br />
 
-<% if current_user %>
+<% if current_user && !photographer_signed_in? %>
   <%= link_to '撮影依頼をする', new_request_path(photographer_id: @photographer.id) %>
-<% else %>
+<% elsif !user_signed_in? && !photographer_signed_in? %>
   <p>撮影依頼をするにはログインしてください。</p>
 <% end %>
+
 
 <% @photographer.portfolios.each do |portfolio| %>
   <% portfolio.images.each do |image| %>
     <%= image_tag image, class: "img-responsive" %>
   <% end %>
 <% end %>
+
 <br />
+
 <% if photographer_signed_in? && current_photographer == @photographer %>
   <%= link_to 'アカウント編集', edit_registration_path(@photographer) %>
   <p><%= link_to 'マイページ編集', edit_photographer_path(@photographer) %></p>
