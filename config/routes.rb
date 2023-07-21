@@ -13,7 +13,14 @@ Rails.application.routes.draw do
     confirmations: 'photographers/confirmations'
   }
 
+  resources :users, only: :show do
+    resources :requests, only: :show, module: :users
+  end
+
   resources :photographers do
+    # ここから下リクエスト
+    resources :requests, only: :show, module: :photographers
+    # ここまで
     resource :like, except: %i[get index show]
     resources :portfolios, only: %i[new create index show destroy] do
       collection do
@@ -40,11 +47,8 @@ Rails.application.routes.draw do
   get '/flow', to: 'static_pages#flow'
   get 'photo/show'
 
-  resources :photographers, only: %i[edit update index]
 
   # 開発環境でのメール確認用
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
-  get 'users/:id', to: 'users#show', as: 'user'
-  get 'photographers/:id', to: 'photographers#show'
 end

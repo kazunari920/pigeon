@@ -2,20 +2,23 @@ class Request < ApplicationRecord
   belongs_to :user
   belongs_to :photographer
   has_many :messages
-  enum status: { offered: 0, accepted: 1, completed: 2, decline: 3 }
+  enum status: { offered: 0, accepted: 1, completed: 2, declined: 3 }
   after_initialize :set_default_status, :if => :new_record?
   validates :shooting_date, :shooting_location, :budget, :address, :phone_number, presence: true
 
-  def accept
-    self.accepted!
+  def accept(photographer)
+    return unless can_be_accepted_by?(photographer)
+    accepted!
   end
 
   def decline
-    self.declined!
+    return unless pending?
+    declined!
   end
 
   def complete
-    self.completed!
+    return unless accepted?
+    completed!
   end
 
   def pending?

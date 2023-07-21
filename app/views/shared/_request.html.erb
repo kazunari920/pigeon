@@ -1,0 +1,17 @@
+<h1>リクエスト詳細</h1>
+
+<p>依頼者: <%= @request.user.name %></p>
+<p>撮影希望日: <%= @request.shooting_date %></p>
+<p>撮影希望地: <%= @request.shooting_location %></p>
+<p>予算: <%= @request.budget %></p>
+<p>コメント（備考）: <%= @request.comment %></p>
+<p>住所: <%= @request.address %></p>
+<p>電話番号: <%= @request.phone_number %></p>
+<p>ステータス: <%= @request.status %></p>
+
+
+<% if @request.status == 'accepted' && (current_user.is_a?(User) || current_user.is_a?(Photographer)) %>
+  <%= link_to 'メッセージ', request_messages_path(@request) %>
+<% end %>
+
+
