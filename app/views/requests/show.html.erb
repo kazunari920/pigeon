@@ -12,29 +12,6 @@
 
 
 
-<%= link_to '一覧に戻る', requests_path %>
-
-<% if @request.status == 'accepted' %>
-  <h2>メッセージ</h2>
-
-  <% @messages.each do |message| %>
-    <p>
-      <%= message.user.name %>: <%= message.body %>
-    </p>
-  <% end %>
-
-  <%= form_with(model: [ @request, @message ]) do |form| %>
-    <div class="field">
-      <%= form.label :body %>
-      <%= form.text_field :body %>
-    </div>
-
-    <div class="actions">
-      <%= form.submit 'メッセージを送信' %>
-    </div>
-  <% end %>
-<% end %>
-
 <!-- TODO:↓確認ダイアログの表示方法がrails7だと変わっているようなので、後ほど要修正 -->
 <% if @request.can_be_accepted_by?(current_photographer) %>
   <%= button_to '受け入れる', accept_request_path(@request),
@@ -49,3 +26,4 @@
   form:{data:{turbo_confirm:"完了してよろしいですか？"}} %>
 <% end %>
 
+<%= link_to '一覧に戻る', requests_path %>

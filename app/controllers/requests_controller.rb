@@ -15,8 +15,13 @@ class RequestsController < ApplicationController
   end
 
   def show
-    @messages = @request.messages.order(created_at: :asc)
-    @message = Message.new
+    @request = Request.find(params[:id])
+
+    if current_user.is_a?(User)
+      render :user_show
+    else
+      render :show
+    end
   end
 
   def update
@@ -73,6 +78,7 @@ class RequestsController < ApplicationController
   end
 
   def request_params
-    params.require(:request).permit(:name, :photographer_id, :shooting_date, :shooting_location, :budget, :comment, :address, :phone_number)
+    params.require(:request).permit(:name, :photographer_id, :shooting_date, :shooting_location,
+                                    :budget, :comment, :address, :phone_number)
   end
 end

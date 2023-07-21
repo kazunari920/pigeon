@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+
   def create
     @message = current_user.messages.build(message_params)
     if @message.save
@@ -7,6 +8,11 @@ class MessagesController < ApplicationController
       render :new
     end
   end
+
+def show
+  @messages = @request.messages.order(created_at: :asc)
+  @message = Message.new
+end
 
   private
 

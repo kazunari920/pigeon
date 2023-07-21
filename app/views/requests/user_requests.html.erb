@@ -2,6 +2,7 @@
 
 <% @requests.each do |request| %>
   <p>
-    <%= link_to "リクエスト詳細を見る", request_path(request) %>
+    <%= link_to request.photographer.name, request_path(request) %>
   </p>
 <% end %>
+

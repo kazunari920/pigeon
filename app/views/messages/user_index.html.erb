@@ -1,0 +1,16 @@
+  <% @messages.each do |message| %>
+    <p>
+      <%= message.user.name %>: <%= message.body %>
+    </p>
+  <% end %>
+
+  <%= form_with(model: [ @request, @message ]) do |form| %>
+    <div class="field">
+      <%= form.label :body %>
+      <%= form.text_field :body %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'メッセージを送信' %>
+    </div>
+  <% end %>
