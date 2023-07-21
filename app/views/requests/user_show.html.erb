@@ -9,8 +9,9 @@
 <p>電話番号: <%= @request.phone_number %></p>
 <p>ステータス: <%= @request.status %></p>
 
-<% if @request.status == 'accepted' && current_user.is_a?(User) %>
+<% if @request.status == 'accepted' && (current_user.is_a?(User) || current_user.is_a?(Photographer)) %>
   <%= link_to 'メッセージ', request_messages_path(@request) %>
 <% end %>
+
 
 <%= link_to '一覧に戻る', requests_path %>

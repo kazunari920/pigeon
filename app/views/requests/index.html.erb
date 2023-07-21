@@ -1,3 +1,10 @@
+<%= form_with url: requests_path, method: :get, local: true do |f| %>
+  <%= f.select :status, options_for_select(Request.statuses.keys.map { |status| [status.humanize, status] }, selected: params[:status]), include_blank: 'All' %>
+  <%= f.submit 'ソート' %>
+<% end %>
+
+
+
 <% if @requests.empty? %>
   <p>リクエストがありません</p>
 <% else %>

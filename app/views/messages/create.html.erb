@@ -1,2 +1,11 @@
-<h1>Messages#create</h1>
-<p>Find me in app/views/messages/create.html.erb</p>
+<% @messages.each do |message| %>
+  <% if message.messageable == current_user || message.messageable == current_photographer %>
+    <div class="outgoing-message">
+      <%= message.content %>
+    </div>
+  <% else %>
+    <div class="incoming-message">
+      <%= message.content %>
+    </div>
+  <% end %>
+<% end %>

@@ -34,6 +34,8 @@ class RequestsController < ApplicationController
 
   def index
     @requests = current_photographer.requests
+    @requests = @requests.where(status: params[:status]) if params[:status].present?
+
   end
 
   def user_requests

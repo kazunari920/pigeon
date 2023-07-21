@@ -1,5 +1,6 @@
 class Message < ApplicationRecord
-  belongs_to :user
+  belongs_to :messageable, polymorphic: true
+  belongs_to :recipient, polymorphic: true
   belongs_to :request
   before_create :check_request_status
 
