@@ -4,9 +4,9 @@ class Message < ApplicationRecord
   belongs_to :request
   before_create :check_request_status
   enum from: { user: 1, photographer: 10 }
+  enum to: { user: 1, photographer: 10 }
 
-
-  validates :content, presence: true
+  validates :user_id, :photographer_id, :request_id, :body, presence: true
 
   private
 
@@ -17,3 +17,4 @@ class Message < ApplicationRecord
     end
   end
 end
+

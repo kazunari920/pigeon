@@ -21,10 +21,10 @@ class MessagesController < ApplicationController
     end
   end
 
-  def show
-    @messages = @request.messages.order(created_at: :asc)
-    @message = @request.messages.build
-  end
+def show
+  @messages = @request.messages.order(created_at: :asc)
+  @message = Message.new
+end
 
   private
 
@@ -40,6 +40,6 @@ class MessagesController < ApplicationController
 
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:request_id, :content)
   end
 end

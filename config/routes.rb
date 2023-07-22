@@ -18,9 +18,9 @@ Rails.application.routes.draw do
   end
 
   resources :photographers do
-    # ここから下リクエスト
+
     resources :requests, only: :show, module: :photographers
-    # ここまで
+
     resource :like, except: %i[get index show]
     resources :portfolios, only: %i[new create index show destroy] do
       collection do

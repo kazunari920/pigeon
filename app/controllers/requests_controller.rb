@@ -14,15 +14,6 @@ class RequestsController < ApplicationController
     end
   end
 
-  def show
-    @request = Request.find(params[:id])
-
-    if current_user.is_a?(User)
-      render :user_show
-    else
-      render :show
-    end
-  end
 
   def update
     if @request.update(request_params)
