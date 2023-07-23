@@ -5,6 +5,7 @@ class Photographer < ApplicationRecord
   has_many :liked_users, through: :likes, source: :user
   has_many :requests
   has_many :portfolios
+  has_many :messages
   acts_as_taggable
 
   def self.search_by_tag(tag)

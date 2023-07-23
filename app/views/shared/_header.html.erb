@@ -5,14 +5,14 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home",    root_path %></li>
         <li><%= link_to "探す",    photographers_path %></li>
-        <li><%= link_to "写真をみるwip",    "#" %></li>
-        <li><%= link_to "よくある質問wip",    help_path %></li>
         <%if user_signed_in?%>
-        <li><%= link_to "マイページ", user_path(current_user) %></li>
-        <li> <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %> </li>
+          <li><%= link_to 'リクエスト', requests_path %></li>
+          <li><%= link_to "マイページ", user_path(current_user) %></li>
+          <li> <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %> </li>
         <%else%>
-        <li><%= link_to"マイページ", photographer_path(current_photographer) %></li>
-        <li> <%= link_to 'ログアウト', destroy_photographer_session_path, method: :delete %> </li>
+          <li><%= link_to 'リクエスト', requests_path %></li>
+          <li><%= link_to"マイページ", photographer_path(current_photographer) %></li>
+          <li> <%= link_to 'ログアウト', destroy_photographer_session_path, method: :delete %> </li>
         <%end%>
       </ul>
     </nav>

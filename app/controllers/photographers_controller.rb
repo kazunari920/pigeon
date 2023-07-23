@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class PhotographersController < ApplicationController
-  before_action :authenticate_photographer!, only: %i[edit update destroy]
-  before_action :correct_photographer, only: %i[edit update destroy]
+  before_action :authenticate_photographer!, only: %i[edit update]
+  before_action :correct_photographer, only: %i[edit update]
 
   def show
     @photographer = Photographer.find_by(id: params[:id])
@@ -19,6 +19,11 @@ class PhotographersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def requests
+    @photographer = Photographer.find(params[:id])
+    @requests = @photographer.requests.order(created_at: :desc)
   end
 
   def index

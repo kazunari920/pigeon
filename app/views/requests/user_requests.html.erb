@@ -1,0 +1,8 @@
+<h1>あなたのリクエスト一覧</h1>
+
+<% @requests.each do |request| %>
+  <p>
+    <%= link_to request.photographer.name, request_path(request) %>
+  </p>
+<% end %>
+

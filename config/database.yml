@@ -16,10 +16,11 @@ default: &default
 
 development:
   <<: *default
-  host: db
+  host: <%= ENV['DATABASE_HOST'] %>
   database: <%= ENV['MYSQL_DATABASE'] %>
   username: <%= ENV['MYSQL_USER'] %>
-  password: <%=ENV['MYSQL_PASSWORD'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
+
 test:
   <<: *default
   database: pigeon_test

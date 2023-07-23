@@ -1,0 +1,26 @@
+<%= form_with url: requests_path, method: :get, local: true do |f| %>
+  <%= f.select :status, options_for_select(Request.statuses.keys.map { |status| [status.humanize, status] }, selected: params[:status]), include_blank: 'All' %>
+  <%= f.submit 'ソート' %>
+<% end %>
+
+<% if @requests.empty? %>
+  <p>リクエストがありません</p>
+<% else %>
+  <% @requests.each do |request| %>
+    <p>
+      <strong>依頼者:</strong>
+      <%= request.user.name %>
+    </p>
+
+    <p>
+      <strong>ステータス:</strong>
+      <%= request.status %>
+    </p>
+
+    <p>
+      <%= link_to('詳細を見る', user_request_path(current_user, request)) if current_user %>
+      <%= link_to('詳細を見る', photographer_request_path(current_photographer, request)) if current_photographer %>
+    </p>
+    <hr>
+  <% end %>
+<% end %>

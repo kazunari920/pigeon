@@ -1,30 +1,47 @@
 <h1>新規依頼</h1>
+<% if @request.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+    <ul>
+    <% @request.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <%= form_for [@photographer, @request] do |f| %>
   <div>
-    <%= f.label :shooting_date, '撮影希望日' %><br />
+    <%= f.label :name, 'お名前' %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :shooting_date, '撮影希望日' %>
     <%= f.date_field :shooting_date %>
   </div>
   <div>
-    <%= f.label :shooting_location, '撮影希望地' %><br />
+    <%= f.label :shooting_location, '撮影希望地' %>
     <%= f.text_field :shooting_location %>
   </div>
   <div>
-    <%= f.label :budget, '予算' %><br />
+    <%= f.label :budget, '予算' %>
     <%= f.number_field :budget %>
   </div>
   <div>
-    <%= f.label :comment, 'コメント（備考）' %><br />
+    <%= f.label :comment, 'コメント（備考）' %>
     <%= f.text_area :comment %>
   </div>
   <div>
-    <%= f.label :address, '住所' %><br />
+    <%= f.label :address, '住所' %>
     <%= f.text_field :address %>
   </div>
   <div>
-    <%= f.label :phone_number, '電話番号' %><br />
+    <%= f.label :phone_number, '電話番号' %>
     <%= f.text_field :phone_number %>
   </div>
+
+  <%= f.hidden_field :photographer_id %>
 
   <%= f.submit '依頼を送信' %>
 <% end %>

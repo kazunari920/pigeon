@@ -1,0 +1,19 @@
+<h1>依頼一覧</h1>
+
+<table>
+  <tr>
+    <th>依頼日時</th>
+    <th>依頼者</th>
+    <th>ステータス</th>
+    <th>操作</th>
+  </tr>
+
+  <% @requests.each do |request| %>
+    <tr>
+      <td><%= request.created_at %></td>
+      <td><%= request.user.name %></td>
+      <td><%= request.status %></td>
+      <td><%= link_to '詳細を見る', request_path(request) %></td>
+    </tr>
+  <% end %>
+</table>
