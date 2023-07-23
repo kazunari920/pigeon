@@ -4,7 +4,6 @@ module Users
     before_action :set_request, only: %i[index create]
     before_action :set_messages, only: [:index]
 
-
     def create
       @message = @request.messages.new(message_params)
       @message.user_id = current_user.id
@@ -17,7 +16,6 @@ module Users
         render :index, notice: 'メッセージの送信に失敗しました'
       end
     end
-
 
     def index
       @message = Message.new
@@ -42,6 +40,5 @@ module Users
     def message_params
       params.require(:message).permit(:content, :request_id, :from)
     end
-
   end
 end

@@ -47,13 +47,9 @@ class Request < ApplicationRecord
     status == 'accepted' && photographer.id == photographer_id
   end
 
-
-
   private
 
   def set_default_status
     self.status ||= :offered
   end
-
-
 end

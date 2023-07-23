@@ -19,7 +19,4 @@ class Message < ApplicationRecord
       throw :abort
     end
   end
-
-
 end
-

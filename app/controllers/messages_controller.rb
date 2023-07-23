@@ -21,7 +21,6 @@ class MessagesController < ApplicationController
   #   end
   # end
 
-
   private
 
   def set_request
@@ -33,7 +32,6 @@ class MessagesController < ApplicationController
       redirect_to new_user_session_path, alert: 'ログインしてください'
     end
   end
-
 
   def message_params
     params.require(:message).permit(:request_id, :content)

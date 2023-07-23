@@ -1,11 +1,5 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: [:show, :update, :accept, :decline, :complete]
-  before_action :authenticate_photographer!, only: [:index]
-  before_action :check_ownership, only: [:show, :update, :accept, :decline, :complete]
-
-  def index
-    @requests = current_photographer.requests
-  end
+  before_action :set_request, only: %i[accept decline complete]
 
   def new
     @request = Request.new(photographer_id: params[:photographer_id])
@@ -13,19 +7,10 @@ class RequestsController < ApplicationController
 
   def create
     @request = current_user.requests.build(request_params)
-    @request.photographer_id = params[:photographer_id]
     if @request.save
       redirect_to user_request_path(current_user, @request), notice: 'リクエストの作成に成功しました'
     else
       render :new
-    end
-  end
-
-  def update
-    if @request.update(request_params)
-      redirect_to @request, notice: 'リクエストの更新に成功しました'
-    else
-      render :edit
     end
   end
 
@@ -71,7 +56,6 @@ class RequestsController < ApplicationController
       redirect_to photographer_request_path(current_photographer, @request), alert: 'リクエストの完了に失敗しました'
     end
   end
-
 
   private
 

@@ -4,7 +4,6 @@ module Photographers
     before_action :set_request, only: %i[index create]
     before_action :set_messages, only: [:index]
 
-
     def create
       @message = @request.messages.new(message_params)
       @message.user_id = @request.user_id
@@ -18,8 +17,6 @@ module Photographers
       end
     end
 
-
-
     def index
       @message = Message.new
     end
@@ -30,7 +27,6 @@ module Photographers
       @messages = @request.messages.order(created_at: :desc)
       Rails.logger.info("set_messagesが呼ばれました。@messages = #{@messages.inspect}")
     end
-
 
     def set_request
       @request = Request.find(params[:request_id])
