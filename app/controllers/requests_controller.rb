@@ -8,7 +8,7 @@ class RequestsController < ApplicationController
   def create
     @request = current_user.requests.build(request_params)
     if @request.save
-      redirect_to user_requests_requests_path, notice: 'リクエストの作成に成功しました'
+      redirect_to user_request_path(current_user, @request), notice: 'リクエストの作成に成功しました'
     else
       render :new
     end
@@ -41,31 +41,28 @@ class RequestsController < ApplicationController
 
   def accept
     @request = Request.find(params[:id])
-    if @request.can_be_accepted_by?(current_photographer)
-      @request.accept
-      redirect_to @request, notice: '依頼を承認しました。'
+    if @request.accept(current_photographer)
+      redirect_to photographer_request_path(current_photographer, @request), notice: '依頼を承認しました。'
     else
-      redirect_to @request, alert: '依頼の承認に失敗しました。'
+      redirect_to photographer_request_path(current_photographer, @request), alert: '依頼の承認に失敗しました。'
     end
   end
 
   def decline
     @request = Request.find(params[:id])
-    if @request.can_be_declined_by?(current_photographer)
-      @request.decline
-      redirect_to @request, notice: '依頼を拒否しました。'
+    if @request.decline(current_photographer)
+      redirect_to photographer_request_path(current_photographer, @request), notice: '依頼を拒否しました。'
     else
-      redirect_to @request, alert: '依頼の拒否に失敗しました。'
+      redirect_to photographer_request_path(current_photographer, @request), alert: '依頼の拒否に失敗しました。'
     end
   end
 
   def complete
     @request = Request.find(params[:id])
-    if @request.can_be_completed_by?(current_photographer)
-      @request.complete
-      redirect_to @request, notice: 'リクエストは完了しました'
+    if @request.complete(current_photographer)
+      redirect_to photographer_request_path(current_photographer, @request), notice: 'リクエストは完了しました'
     else
-      redirect_to @request, alert: 'リクエストの完了に失敗しました'
+      redirect_to photographer_request_path(current_photographer, @request), alert: 'リクエストの完了に失敗しました'
     end
   end
 

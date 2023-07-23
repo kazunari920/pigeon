@@ -20,21 +20,27 @@ Rails.application.routes.draw do
   end
 
   resources :photographers do
+    resource :like, except: %i[get index show]
+    resources :portfolios, only: %i[new create index show destroy] do
+      collection do
+        get 'destroy_form'
+        delete 'destroy_multiple'
+      end
+    end
     resources :requests, only: :show, module: :photographers do
       resources :messages, only: %i[create index]
     end
   end
   resource :like, except: %i[get index show]
 
-  resources :portfolios, only: %i[new create index show destroy] do
-    collection do
-      get 'destroy_form'
-      delete 'destroy_multiple'
-    end
-  end
 
-  resources :requests, only: [:index] do
-    #resources :messages
+
+  resources :requests, only: [:index, :create, :new] do
+    member do
+      post 'accept'
+      post 'decline'
+      post 'complete'
+    end
   end
 
   root 'static_pages#home'

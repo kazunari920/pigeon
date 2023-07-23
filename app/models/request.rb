@@ -7,21 +7,24 @@ class Request < ApplicationRecord
   validates :shooting_date, :shooting_location, :budget, :address, :phone_number, presence: true
 
   def accept(photographer)
-    return unless can_be_accepted_by?(photographer)
+    return false unless can_be_accepted_by?(photographer)
 
     accepted!
+    true
   end
 
   def decline(photographer)
-    return unless can_be_declined_by?(photographer)
+    return false unless can_be_declined_by?(photographer)
 
     declined!
+    true
   end
 
   def complete(photographer)
-    return unless can_be_completed_by?(photographer)
+    return false unless can_be_completed_by?(photographer)
 
     completed!
+    true
   end
 
   def pending?

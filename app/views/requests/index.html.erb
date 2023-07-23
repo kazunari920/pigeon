@@ -18,9 +18,9 @@
     </p>
 
     <p>
-      <%= link_to '詳細を見る', user_request_path(current_user, request) %>
+      <%= link_to('詳細を見る', user_request_path(current_user, request)) if current_user %>
+      <%= link_to('詳細を見る', photographer_request_path(current_photographer, request)) if current_photographer %>
     </p>
-
     <hr>
   <% end %>
 <% end %>

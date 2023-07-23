@@ -1,8 +1,9 @@
 module Photographers
   class MessagesController < ApplicationController
     before_action :authenticate_user_or_photographer
-    before_action :set_messages, only: [:index]
     before_action :set_request, only: %i[index create]
+    before_action :set_messages, only: [:index]
+
 
     def create
       @message = @request.messages.new(message_params)
