@@ -1,4 +1,4 @@
-<h1>リクエスト詳細</h1>
+<h1>リクエスト詳細old</h1>
 
 <p>依頼者: <%= @request.user.name %></p>
 <p>撮影希望日: <%= @request.shooting_date %></p>
@@ -11,22 +11,10 @@
 
 
 <% if @request.status == 'accepted' && (current_user.is_a?(User) || current_user.is_a?(Photographer)) %>
-  <%= link_to 'メッセージ', request_messages_path(@request) %>
+  <%= link_to 'メッセージ', photographer_request_messages_path(current_photographer,@request) %>
 <% end %>
 
 
-<!-- TODO:↓確認ダイアログの表示方法がrails7だと変わっているようなので、後ほど要修正 -->
-<% if @request.can_be_accepted_by?(current_photographer) %>
-  <%= button_to '受け入れる', accept_request_path(@request),
-   form:{data:{turbo_confirm:"リクエストを受け入れますか？"}} %>
-<% end %>
-<% if @request.can_be_declined_by?(current_photographer) %>
-  <%= button_to '拒否する', decline_request_path(@request),
-   form:{data:{turbo_confirm:"リクエストを拒否しますか？"}} %>
-<% end %>
-<% if @request.can_be_completed_by?(current_photographer) %>
-  <%= button_to '完了する', complete_request_path(@request),
-  form:{data:{turbo_confirm:"完了してよろしいですか？"}} %>
-<% end %>
+
 
 <%= link_to '一覧に戻る', requests_path %>

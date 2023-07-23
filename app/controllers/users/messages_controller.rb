@@ -1,25 +1,33 @@
 module Users
   class MessagesController < ApplicationController
-    before_action :set_request
     before_action :authenticate_user_or_photographer
+    before_action :set_request, only: %i[index create]
+    before_action :set_messages, only: [:index]
+
 
     def create
-      @message = Message.new(message_params)
+      @message = @request.messages.new(message_params)
       @message.user_id = current_user.id
-      @message.from = :user
+      @message.photographer_id = @request.photographer_id
+      @message.from = Message.froms[:user]
+
       if @message.save
-        redirect_to user_path(current_user), notice: 'メッセージを送信しました'
+        redirect_to user_request_messages_path(current_user, @request), notice: 'メッセージを送信しました'
       else
-        render :new
+        render :index, notice: 'メッセージの送信に失敗しました'
       end
     end
 
-    def show
-      @messages = @request.messages.order(created_at: :asc)
+
+    def index
       @message = Message.new
     end
 
     private
+
+    def set_messages
+      @messages = @request.messages.order(created_at: :desc)
+    end
 
     def set_request
       @request = Request.find(params[:request_id])
@@ -32,7 +40,8 @@ module Users
     end
 
     def message_params
-      params.require(:message).permit(:request_id, :content)
+      params.require(:message).permit(:content, :request_id, :from)
     end
+
   end
 end

@@ -8,16 +8,19 @@ class Request < ApplicationRecord
 
   def accept(photographer)
     return unless can_be_accepted_by?(photographer)
+
     accepted!
   end
 
-  def decline
-    return unless pending?
+  def decline(photographer)
+    return unless can_be_declined_by?(photographer)
+
     declined!
   end
 
-  def complete
-    return unless accepted?
+  def complete(photographer)
+    return unless can_be_completed_by?(photographer)
+
     completed!
   end
 

@@ -10,8 +10,6 @@
 <p>ステータス: <%= @request.status %></p>
 
 
-<% if @request.status == 'accepted' && (current_user.is_a?(User) || current_user.is_a?(Photographer)) %>
-  <%= link_to 'メッセージ', request_messages_path(@request) %>
-<% end %>
+
 
 

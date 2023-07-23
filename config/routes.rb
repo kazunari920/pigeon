@@ -14,30 +14,27 @@ Rails.application.routes.draw do
   }
 
   resources :users, only: :show do
-    resources :requests, only: :show, module: :users
+    resources :requests, only: :show, module: :users do
+      resources :messages, only: %i[create index]
+    end
   end
 
   resources :photographers do
+    resources :requests, only: :show, module: :photographers do
+      resources :messages, only: %i[create index]
+    end
+  end
+  resource :like, except: %i[get index show]
 
-    resources :requests, only: :show, module: :photographers
-
-    resource :like, except: %i[get index show]
-    resources :portfolios, only: %i[new create index show destroy] do
-      collection do
-        get 'destroy_form'
-        delete 'destroy_multiple'
-      end
+  resources :portfolios, only: %i[new create index show destroy] do
+    collection do
+      get 'destroy_form'
+      delete 'destroy_multiple'
     end
   end
 
-  resources :requests do
-    resources :messages, only: [:create]
-    get 'user_requests', on: :collection
-    member do
-      post 'accept'
-      post 'decline'
-      post 'complete'
-    end
+  resources :requests, only: [:index] do
+    #resources :messages
   end
 
   root 'static_pages#home'
@@ -47,8 +44,6 @@ Rails.application.routes.draw do
   get '/flow', to: 'static_pages#flow'
   get 'photo/show'
 
-
   # 開発環境でのメール確認用
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
-
 end

@@ -24,9 +24,15 @@ class RequestsController < ApplicationController
   end
 
   def index
-    @requests = current_photographer.requests
+    if current_user
+      @requests = current_user.requests
+    elsif current_photographer
+      @requests = current_photographer.requests
+    else
+      redirect_to login_path, alert: 'ログインが必要です'
+      return
+    end
     @requests = @requests.where(status: params[:status]) if params[:status].present?
-
   end
 
   def user_requests

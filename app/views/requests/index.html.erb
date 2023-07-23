@@ -3,8 +3,6 @@
   <%= f.submit 'ソート' %>
 <% end %>
 
-
-
 <% if @requests.empty? %>
   <p>リクエストがありません</p>
 <% else %>
@@ -19,7 +17,9 @@
       <%= request.status %>
     </p>
 
-    <%= link_to '詳細を見る', request_path(request) %>
+    <p>
+      <%= link_to '詳細を見る', user_request_path(current_user, request) %>
+    </p>
 
     <hr>
   <% end %>
