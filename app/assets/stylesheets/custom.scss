@@ -1,15 +1,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-body {
-  padding-top: 100px;
-  text-align: center;
-}
+// body {
+//   padding-top: 100px;
+//   text-align: center;
+// }
 
 button.button-link {
   background: none;
   border: none;
-  padding: 0;
+  padding: 20;
   color: blue;
   text-decoration: underline;
   cursor: pointer;

@@ -1,10 +1,10 @@
 <% if @photographer %>
   <p>
-    <strong>ユーザー名</strong>
+    <strong>ユーザー名:</strong>
     <%= @photographer.name %>
   </p>
   <p>
-    <strong>e-mail</strong>
+    <strong>e-mail:</strong>
     <%= @photographer.email %>
   </p>
 
@@ -12,7 +12,7 @@
   <strong>自己紹介:</strong>
   <%= @photographer.description %>
 </p>
-</p>
+
 
 <% if user_signed_in? && current_user.liked?(@photographer) %>
   <%= button_to 'いいね解除', photographer_like_path(@photographer), method: :delete, data: { confirm: '本当に解除しますか?' } %>
@@ -20,15 +20,14 @@
   <%= button_to 'いいね', photographer_like_path(@photographer), method: :post %>
 <% end %>
 
-<%= link_to '依頼を作成', new_photographer_request_path(@photographer) %>
-
-
-
-<h3>タグ</h3>
-<% @photographer.tags.each do |tag| %>
-  <%= link_to tag.name, photographers_path(tag: tag.name) %>
-
-<% end %>
+<div class="tag-section">
+  <h3>タグ</h3>
+  <% @photographer.tags.each do |tag| %>
+    <div class="tag">
+      <%= link_to tag.name, photographers_path(tag: tag.name) %>
+    </div>
+  <% end %>
+</div>
 
 <br />
 
@@ -48,10 +47,10 @@
 <br />
 
 <% if photographer_signed_in? && current_photographer == @photographer %>
-  <%= link_to 'アカウント編集', edit_registration_path(@photographer) %>
-  <p><%= link_to 'マイページ編集', edit_photographer_path(@photographer) %></p>
-<%= link_to '写真を追加', new_photographer_portfolio_path(@photographer) %><br />
-<%= link_to '写真を削除', destroy_form_photographer_portfolios_path(@photographer), method: :get %>
+  <%= link_to 'アカウント編集', edit_registration_path(@photographer), class: "btn  btn-primary m-2" %>
+  <%= link_to 'マイページ編集', edit_photographer_path(@photographer), class: "btn  btn-primary m-2" %>
+<%= link_to '写真を追加', new_photographer_portfolio_path(@photographer), class: "btn  btn-primary m-2" %><br />
+<%= link_to '写真を削除', destroy_form_photographer_portfolios_path(@photographer), method: :get, class: "btn  btn-primary m-2" %>
 <% end %>
 
 

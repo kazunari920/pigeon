@@ -34,7 +34,7 @@ class PhotographersController < ApplicationController
                      else
                        Photographer.none
                      end
-    @example_tags = %w[洋装 和装 チャペル 神社 前撮り] # 検索フォームの下に表示するタグ
+    @example_tags = %w[洋装 和装 チャペル 神社 前撮り] # 検索フォームの下に固定で表示するタグ
   end
 
   private

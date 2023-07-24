@@ -5,9 +5,11 @@
   <%= text_field_tag :tag, params[:tag] %>
   <%= submit_tag "検索", name: nil %>
 <% end %>
-<% @example_tags.each do |tag| %>
-  <%= link_to tag, photographers_path(tag: tag) %>
-<% end %>
+<div class="example_tags">
+  <% @example_tags.each do |tag| %>
+    <%= link_to tag, photographers_path(tag: tag) %>
+  <% end %>
+</div>
 </p>
 <% if @photographers.present? %>
   <ul>
