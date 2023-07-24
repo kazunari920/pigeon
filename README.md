@@ -1,5 +1,5 @@
 # Pigeon 概要
-[RenderURL](https://pigeon-400z.onrender.com/)
+URL : [https://pigeon-400z.onrender.com/](https://pigeon-400z.onrender.com/)
 
 このアプリケーションは、利用者が好みに合ったフォトグラファーを見つけたり、依頼を申し込んだり、コミュニケーションを取ることができる機能を持っています。
 
