@@ -1,9 +1,13 @@
 module Photographers
   class RequestsController < ::RequestsController
-    before_action :correct_photographer
+    before_action :correct_photographer!
 
     def show
-      @request = Request.find(params[:id])
+      @photographer = Photographer.find(params[:photographer_id])
+      @request = @photographer.requests.find_by(id: params[:id])
+      return if @request
+
+      redirect_to photographer_path(current_photographer), alert: 'リクエストが見つかりませんでした'
     end
   end
 end
