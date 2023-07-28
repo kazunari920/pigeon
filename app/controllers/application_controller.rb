@@ -11,4 +11,13 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(_resource)
     root_path \
   end
+
+  private
+
+  def correct_photographer!
+    @photographer = Photographer.find(params[:photographer_id])
+    return if @photographer == current_photographer
+
+    redirect_to photographer_path(current_photographer)
+  end
 end

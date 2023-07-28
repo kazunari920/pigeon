@@ -45,11 +45,4 @@ class PortfoliosController < ApplicationController
   def portfolio_params
     params.require(:portfolio).permit(:title, :description, images: [])
   end
-
-  def correct_photographer
-    @photographer = Photographer.find(params[:photographer_id])
-    return if @photographer == current_photographer
-
-    redirect_to photographer_path(current_photographer)
-  end
 end
