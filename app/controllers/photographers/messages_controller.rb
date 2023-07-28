@@ -1,8 +1,10 @@
 module Photographers
   class MessagesController < ApplicationController
     before_action :authenticate_user_or_photographer
+    before_action :correct_photographer!
     before_action :set_request, only: %i[index create]
     before_action :set_messages, only: [:index]
+    before_action :check_status, only: %i[create index]
 
     def create
       @message = @request.messages.new(message_params)
@@ -25,7 +27,6 @@ module Photographers
 
     def set_messages
       @messages = @request.messages.order(created_at: :desc)
-      Rails.logger.info("set_messagesが呼ばれました。@messages = #{@messages.inspect}")
     end
 
     def set_request
@@ -40,6 +41,17 @@ module Photographers
       unless user_signed_in? || photographer_signed_in?
         redirect_to new_user_session_path, alert: 'ログインしてください'
       end
+    end
+
+    def check_status
+      return if @request.accepted?
+
+      if @request.pending?
+        flash[:error] = 'リクエストがまだ承認されていません。'
+      else
+        flash[:error] = 'このリクエストは閉じられました'
+      end
+      redirect_to requests_path
     end
   end
 end
