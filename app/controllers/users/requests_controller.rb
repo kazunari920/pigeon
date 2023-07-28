@@ -1,5 +1,5 @@
 module Users
-  class RequestsController < ApplicationController
+  class RequestsController < ::RequestsController
     def show
       @request = Request.find(params[:id])
       @user = User.find(params[:user_id])

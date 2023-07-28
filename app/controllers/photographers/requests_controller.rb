@@ -1,5 +1,5 @@
 module Photographers
-    class RequestsController < ApplicationController
+    class RequestsController < ::RequestsController
         def show
           @request = Request.find(params[:id])
         end
