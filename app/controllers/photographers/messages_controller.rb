@@ -48,7 +48,10 @@ module Photographers
 
     def check_status
       if @request.pending?
-        flash[:error] = 'リクエストが承認されていません'
+        flash[:error] = 'このリクエストは承認されていません'
+        redirect_to requests_path
+      elsif @request.completed?
+        flash[:error] = 'このリクエストは閉じられました'
         redirect_to requests_path
       end
     end
