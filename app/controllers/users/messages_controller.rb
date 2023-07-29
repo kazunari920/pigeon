@@ -1,7 +1,8 @@
 module Users
-  class MessagesController < ApplicationController
-    before_action :authenticate_user_or_photographer
+  class MessagesController < ::MessagesController
+    before_action :correct_user!
     before_action :set_request, only: %i[index create]
+    before_action :check_status, only: %i[create index]
     before_action :set_messages, only: [:index]
 
     def create
@@ -28,12 +29,9 @@ module Users
     end
 
     def set_request
-      @request = Request.find(params[:request_id])
-    end
-
-    def authenticate_user_or_photographer
-      unless user_signed_in? || photographer_signed_in?
-        redirect_to new_user_session_path, alert: 'ログインしてください'
+      @request = current_user.find_request(params[:request_id])
+      unless @request && @request.accessed_by?(current_user, current_photographer)
+        redirect_to requests_path, alert: 'アクセスが許可されていません'
       end
     end
 

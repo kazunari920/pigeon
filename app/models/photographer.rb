@@ -12,10 +12,6 @@ class Photographer < ApplicationRecord
     Photographer.tagged_with(tag)
   end
 
-  def find_request(id)
-    requests.find_by(id: id)
-  end
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

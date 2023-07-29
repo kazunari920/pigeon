@@ -1,6 +1,5 @@
 module Photographers
-  class MessagesController < ApplicationController
-    before_action :authenticate_user_or_photographer
+  class MessagesController < ::MessagesController
     before_action :correct_photographer!
     before_action :set_request, only: %i[create index]
     before_action :check_status, only: %i[create index]
@@ -38,22 +37,6 @@ module Photographers
 
     def message_params
       params.require(:message).permit(:content, :request_id, :from)
-    end
-
-    def authenticate_user_or_photographer
-      unless user_signed_in? || photographer_signed_in?
-        redirect_to new_user_session_path, alert: 'ログインしてください'
-      end
-    end
-
-    def check_status
-      if @request.pending?
-        flash[:error] = 'このリクエストは承認されていません'
-        redirect_to requests_path
-      elsif @request.completed?
-        flash[:error] = 'このリクエストは閉じられました'
-        redirect_to requests_path
-      end
     end
   end
 end
