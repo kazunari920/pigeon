@@ -14,9 +14,9 @@ class Message < ApplicationRecord
   private
 
   def check_request_status
-    return unless request.accepted?
+    return if request.accepted? || request.completed?
 
-    errors.add(:base, 'リクエストがまだ承認されていません。')
+    errors.add(:base, 'リクエストが承認されていません。')
     throw :abort
   end
 end

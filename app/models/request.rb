@@ -35,6 +35,10 @@ class Request < ApplicationRecord
     status == 'accepted'
   end
 
+  def completed?
+    status == 'completed'
+  end
+
   def can_be_accepted_by?(photographer)
     status == 'offered' && photographer.id == photographer_id
   end

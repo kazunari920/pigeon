@@ -1,6 +1,5 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: %i[accept decline complete]
-  before_action :correct_photographer!, only: %i[accept decline complete]
 
   def new
     @request = Request.new(photographer_id: params[:photographer_id])

@@ -2,9 +2,9 @@ module Photographers
   class MessagesController < ApplicationController
     before_action :authenticate_user_or_photographer
     before_action :correct_photographer!
-    before_action :set_request, only: %i[index create]
-    before_action :set_messages, only: [:index]
+    before_action :set_request, only: %i[create index]
     before_action :check_status, only: %i[create index]
+    before_action :set_messages, only: %i[index]
 
     def create
       @message = @request.messages.new(message_params)
@@ -30,7 +30,10 @@ module Photographers
     end
 
     def set_request
-      @request = Request.find(params[:request_id])
+      @request = current_photographer.requests.find_by(id: params[:request_id])
+      unless @request && (@request.user == current_user || @request.photographer == current_photographer)
+        redirect_to requests_path, alert: 'アクセスが許可されていません'
+      end
     end
 
     def message_params
@@ -44,14 +47,10 @@ module Photographers
     end
 
     def check_status
-      return if @request.accepted?
-
       if @request.pending?
-        flash[:error] = 'リクエストがまだ承認されていません。'
-      else
-        flash[:error] = 'このリクエストは閉じられました'
+        flash[:error] = 'リクエストが承認されていません'
+        redirect_to requests_path
       end
-      redirect_to requests_path
     end
   end
 end
