@@ -30,8 +30,8 @@ module Photographers
     end
 
     def set_request
-      @request = current_photographer.requests.find_by(id: params[:request_id])
-      unless @request && (@request.user == current_user || @request.photographer == current_photographer)
+      @request = current_photographer.find_request(params[:request_id])
+      unless @request && @request.accessed_by?(current_user, current_photographer)
         redirect_to requests_path, alert: 'アクセスが許可されていません'
       end
     end

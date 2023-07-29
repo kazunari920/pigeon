@@ -51,6 +51,10 @@ class Request < ApplicationRecord
     status == 'accepted' && photographer.id == photographer_id
   end
 
+  def accessed_by?(user, photographer)
+    self.user == user || self.photographer == photographer
+  end
+
   private
 
   def set_default_status
