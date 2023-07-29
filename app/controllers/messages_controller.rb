@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
     if @request.pending?
       flash[:error] = 'このリクエストは承認されていません'
       redirect_to requests_path
-    elsif @request.completed?
+    elsif @request.declined?
       flash[:error] = 'このリクエストは閉じられました'
       redirect_to requests_path
     end

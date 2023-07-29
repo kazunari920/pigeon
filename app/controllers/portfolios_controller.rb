@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PortfoliosController < ApplicationController
-  before_action :correct_photographer, only: %i[destroy_multiple destroy_form]
+  before_action :correct_photographer!, only: %i[new create destroy_multiple destroy_form]
 
   def new
     @photographer = Photographer.find(params[:photographer_id])
