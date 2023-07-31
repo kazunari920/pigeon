@@ -1,4 +1,5 @@
 class Message < ApplicationRecord
+  include Findable
   belongs_to :user
   belongs_to :photographer
   belongs_to :request

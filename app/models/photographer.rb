@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Photographer < ApplicationRecord
+  include Findable
   has_many :likes
   has_many :liked_users, through: :likes, source: :user
   has_many :requests
