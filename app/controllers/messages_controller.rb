@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-  before_action :authenticate_user_or_photographer
 
   private
 
@@ -15,12 +14,6 @@ class MessagesController < ApplicationController
     when 'offered'
       flash[:error] = 'このリクエストは承認されていません'
       redirect_to requests_path
-    end
-  end
-
-  def authenticate_user_or_photographer
-    unless user_signed_in? || photographer_signed_in?
-      redirect_to new_user_session_path, alert: 'ログインしてください'
     end
   end
 end
