@@ -1,5 +1,6 @@
 module Users
   class RequestsController < ::RequestsController
+    include Authorizer
     before_action :correct_user!
 
     def show

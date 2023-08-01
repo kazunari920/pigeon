@@ -1,5 +1,6 @@
 module Users
   class MessagesController < ::MessagesController
+    include Authorizer
     before_action :correct_user!
     before_action :set_request, only: %i[index create]
     before_action :check_status, only: %i[create index]
@@ -29,7 +30,7 @@ module Users
     end
 
     def set_request
-      @request = current_user.find_request(params[:request_id])
+      @request = current_user.requests.find(params[:request_id])
       unless @request && @request.accessed_by?(current_user, current_photographer)
         redirect_to requests_path, alert: 'アクセスが許可されていません'
       end

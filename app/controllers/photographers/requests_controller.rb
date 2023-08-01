@@ -1,5 +1,6 @@
 module Photographers
   class RequestsController < ::RequestsController
+    include Authorizer
     before_action :correct_photographer!
 
     def show

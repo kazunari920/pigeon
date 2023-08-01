@@ -43,6 +43,14 @@ class Request < ApplicationRecord
     status == 'declined'
   end
 
+  def status?
+    return 'accepted' if accepted?
+    return 'declined' if declined?
+    return 'complete' if completed?
+
+    'offered'
+  end
+
   def can_be_accepted_by?(photographer)
     status == 'offered' && photographer.id == photographer_id
   end
