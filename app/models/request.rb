@@ -46,7 +46,7 @@ class Request < ApplicationRecord
   def status?
     return 'accepted' if accepted?
     return 'declined' if declined?
-    return 'complete' if completed?
+    return 'completed' if completed?
 
     'offered'
   end
