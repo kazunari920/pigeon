@@ -9,6 +9,4 @@ class Message < ApplicationRecord
   def sender
     self.user? ? user.name : photographer.name
   end
-
-
 end
