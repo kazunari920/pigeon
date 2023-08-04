@@ -9,7 +9,17 @@ class Request < ApplicationRecord
   def accept(photographer)
     return false unless can_be_accepted_by?(photographer)
 
-    accepted!
+    transaction do
+      accepted!
+      Message.create!(
+        user: self.user,
+        photographer: photographer,
+        request: self,
+        content: 'リクエストありがとうございます',
+        from: :photographer
+      )
+    end
+
     true
   end
 
@@ -49,11 +59,6 @@ class Request < ApplicationRecord
     return 'completed' if completed?
 
     'offered'
-  end
-
-  def initial_message(current_photographer)
-    message = self.messages.build(content: 'リクエストありがとうございます！', photographer_id: current_photographer.id)
-    message.save
   end
 
   def can_be_accepted_by?(photographer)
