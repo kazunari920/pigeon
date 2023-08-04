@@ -51,6 +51,11 @@ class Request < ApplicationRecord
     'offered'
   end
 
+  def initial_message(current_photographer)
+    message = self.messages.build(content: 'リクエストありがとうございます！', photographer_id: current_photographer.id)
+    message.save
+  end
+
   def can_be_accepted_by?(photographer)
     status == 'offered' && photographer.id == photographer_id
   end
