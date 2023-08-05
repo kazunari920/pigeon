@@ -15,7 +15,7 @@ class Request < ApplicationRecord
         user: self.user,
         photographer: photographer,
         request: self,
-        content: 'リクエストありがとうございます',
+        content: photographer.initial_message,
         from: :photographer
       )
     end
