@@ -27,6 +27,7 @@ class Request < ApplicationRecord
     true
   end
 
+# TODO このメソッドは不必要の可能性が高いため要考慮↓
   def pending?
     status == 'offered'
   end
@@ -42,13 +43,20 @@ class Request < ApplicationRecord
   def declined?
     status == 'declined'
   end
+# TODO ここまでのメソッドは不必要の可能性が高いため要考慮↑
 
-  def status?
+  def status?   # TODO 名称が不適切なため後ほど変更
     return 'accepted' if accepted?
     return 'declined' if declined?
     return 'completed' if completed?
 
     'offered'
+  end
+
+  def can_sent_to_message?(status)
+    return true if status == 'accepted' || status == 'completed'
+
+    false
   end
 
   def can_be_accepted_by?(photographer)
