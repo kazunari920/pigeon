@@ -27,9 +27,9 @@ class Request < ApplicationRecord
     true
   end
 
-  # TODO: statusメソッドがあるため、必要なくなる可能性が高い
+  # ↓TODO: statusメソッドがあるため、必要なくなる可能性が高い
   # また、?をつけるのは慣習的にboolean型のメソッドのみ
-  # 後ほどリファクタリングする
+  # enumを使用して後ほどリファクタリングする
 
   def pending?
     status == 'offered'
@@ -46,9 +46,9 @@ class Request < ApplicationRecord
   def declined?
     status == 'declined'
   end
-  # ここまで
+  # ↑ここまで
 
-  # ?をつけるのは慣習的にboolean型のメソッドのみ
+  # ↓?をつけるのは慣習的にboolean型のメソッドのみ
 
   def status?
     return 'accepted' if accepted?
