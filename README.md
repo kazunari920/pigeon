@@ -49,6 +49,10 @@ URL : [https://pigeon-400z.onrender.com/](https://pigeon-400z.onrender.com/)
   - フォトグラファーが一部利用者を依頼が送れないようブロックすることができる
 
 
+#　修正予定
+- requestモデルの各メソッドを見直し（詳細はコメント)
+  - enumの使用と不必要なメソッドの削除
+
 # 使用技術
 Ruby, Ruby on Rails, AWS(S3 RDS), Docker
 
