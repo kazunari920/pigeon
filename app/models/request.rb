@@ -27,7 +27,10 @@ class Request < ApplicationRecord
     true
   end
 
-# TODO このメソッドは不必要の可能性が高いため要考慮↓
+  # TODO: statusメソッドがあるため、必要なくなる可能性が高い
+  # また、?をつけるのは慣習的にboolean型のメソッドのみ
+  # 後ほどリファクタリングする
+
   def pending?
     status == 'offered'
   end
@@ -43,9 +46,11 @@ class Request < ApplicationRecord
   def declined?
     status == 'declined'
   end
-# TODO ここまでのメソッドは不必要の可能性が高いため要考慮↑
+  # ここまで
 
-  def status?   # TODO 名称が不適切なため後ほど変更
+  # ?をつけるのは慣習的にboolean型のメソッドのみ
+
+  def status?
     return 'accepted' if accepted?
     return 'declined' if declined?
     return 'completed' if completed?
@@ -53,7 +58,7 @@ class Request < ApplicationRecord
     'offered'
   end
 
-  def can_sent_to_message?(status)
+  def can_send_to_message?(status)
     return true if ['accepted', 'completed'].include?(status)
 
     false

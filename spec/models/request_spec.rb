@@ -88,28 +88,37 @@ RSpec.describe Request, type: :model do
         request.complete(photographer)
       end
     end
+    context 'requestがcompleteに失敗した場合' do
+      before do
+        allow(request).to receive(:can_be_completed_by?).and_return(false)
+        allow(request).to receive(:completed!).and_return(false)
+      end
+      it 'completeに失敗した時falseを返す' do
+        expect(request.complete(photographer)).to be false
+      end
+    end
   end
 
-  describe '#can_sent_to_message?' do
+  describe '#can_send_to_message?' do
     context 'statusがacceptの場合' do
       let(:status) { 'accepted' }
 
       it 'trueを返す' do
-        expect(request.can_sent_to_message?(status)).to be true
+        expect(request.can_send_to_message?(status)).to be true
       end
     end
     context 'statusがcompletedの場合' do
       let(:status) { 'completed' }
 
       it 'trueを返す' do
-        expect(request.can_sent_to_message?(status)).to be true
+        expect(request.can_send_to_message?(status)).to be true
       end
     end
     context 'statusがacceptでもcompletedでもない場合' do
       let(:status) { 'offered' } # またはdeclined
 
       it 'falseを返す' do
-        expect(request.can_sent_to_message?(status)).to be false
+        expect(request.can_send_to_message?(status)).to be false
       end
     end
   end
