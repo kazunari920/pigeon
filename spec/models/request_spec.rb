@@ -114,8 +114,15 @@ RSpec.describe Request, type: :model do
         expect(request.can_send_to_message?(status)).to be true
       end
     end
-    context 'statusがacceptでもcompletedでもない場合' do
-      let(:status) { 'offered' } # またはdeclined
+    context 'statusがofferedの場合' do
+      let(:status) { 'offered' }
+
+      it 'falseを返す' do
+        expect(request.can_send_to_message?(status)).to be false
+      end
+    end
+    context 'statusがdeclinedの場合' do
+      let(:status) { 'declined' }
 
       it 'falseを返す' do
         expect(request.can_send_to_message?(status)).to be false
