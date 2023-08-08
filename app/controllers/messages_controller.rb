@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   private
 
   def check_status
-    case @request.status?
+    case @request.status_text
     when 'accepted'
       # なにもしない
     when 'declined'

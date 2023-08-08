@@ -29,6 +29,7 @@ class Request < ApplicationRecord
 
   # ↓TODO: 後ほどenumで作り直す
   # ただしstatusメソッドがあるため、必要なくなる可能性あり
+
   # ?をつけるのは慣習的にboolean型のメソッドのみ
 
   def pending?
@@ -50,7 +51,7 @@ class Request < ApplicationRecord
 
   # ↓TODO: ?をつけるのは慣習的にboolean型のメソッドのみ、後ほど修正
 
-  def status?
+  def status_text
     return 'accepted' if accepted?
     return 'declined' if declined?
     return 'completed' if completed?

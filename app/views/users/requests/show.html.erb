@@ -1,6 +1,6 @@
 <%= render 'shared/request' %>
 
-<% if ['accepted', 'completed'].include?(@request.status?) %>
+<% if ['accepted', 'completed'].include?(@request.status_text) %>
 	<%= link_to 'メッセージ', user_request_messages_path(current_user,@request) %>
 <% end %>
 
