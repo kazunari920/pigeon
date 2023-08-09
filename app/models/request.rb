@@ -58,8 +58,9 @@ class Request < ApplicationRecord
     'offered'
   end
 
-  def can_send_to_message?(status)
-    return true if ['accepted', 'completed'].include?(status)
+  def can_send_to_message?
+    return true if accepted?
+    return true if completed?
 
     false
   end
