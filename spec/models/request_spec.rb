@@ -103,7 +103,6 @@ RSpec.describe Request, type: :model do
     context 'acceptedの場合' do
       let(:request) { Request.new(status: 'accepted') }
       it 'trueを返す' do
-        puts 'ステータス', request.can_send_to_message?
         expect(request.can_send_to_message?).to be true
       end
     end
@@ -111,7 +110,6 @@ RSpec.describe Request, type: :model do
     context 'completedの場合' do
       let(:request) { Request.new(status: 'completed') }
       it 'trueを返す' do
-        puts 'ステータス', request.can_send_to_message?
         expect(request.can_send_to_message?).to be true
       end
     end
@@ -119,7 +117,6 @@ RSpec.describe Request, type: :model do
     context 'declineの場合' do
       let(:request) { Request.new(status: 'declined') }
       it 'falseを返す' do
-        puts 'ステータス', request.can_send_to_message?
         expect(request.can_send_to_message?).to be false
       end
     end
@@ -127,7 +124,6 @@ RSpec.describe Request, type: :model do
     context 'offeredの場合' do
       let(:request) { Request.new(status: 'offered') }
       it 'falseを返す' do
-        puts 'ステータス', request.can_send_to_message?
         expect(request.can_send_to_message?).to be false
       end
     end
