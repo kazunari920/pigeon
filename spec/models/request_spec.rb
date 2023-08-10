@@ -114,7 +114,7 @@ RSpec.describe Request, type: :model do
       end
     end
 
-    context 'declineの場合' do
+    context 'declinedの場合' do
       let(:request) { Request.new(status: 'declined') }
       it 'falseを返す' do
         expect(request.can_send_to_message?).to be false
