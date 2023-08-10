@@ -1,6 +1,6 @@
 <%= render 'shared/request' %>
 
-<% if ['accepted', 'completed'].include?(@request.status?) %>
+<% if @request.can_send_to_message? %>
 	<%= link_to 'メッセージ', user_request_messages_path(current_user,@request) %>
 <% end %>
 

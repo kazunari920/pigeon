@@ -100,32 +100,35 @@ RSpec.describe Request, type: :model do
   end
 
   describe '#can_send_to_message?' do
-    context 'statusがacceptの場合' do
-      let(:status) { 'accepted' }
-
+    context 'acceptedの場合' do
+      let(:request) { Request.new(status: 'accepted') }
       it 'trueを返す' do
-        expect(request.can_send_to_message?(status)).to be true
+        puts 'ステータス', request.can_send_to_message?
+        expect(request.can_send_to_message?).to be true
       end
     end
-    context 'statusがcompletedの場合' do
-      let(:status) { 'completed' }
 
+    context 'completedの場合' do
+      let(:request) { Request.new(status: 'completed') }
       it 'trueを返す' do
-        expect(request.can_send_to_message?(status)).to be true
+        puts 'ステータス', request.can_send_to_message?
+        expect(request.can_send_to_message?).to be true
       end
     end
-    context 'statusがofferedの場合' do
-      let(:status) { 'offered' }
 
+    context 'declineの場合' do
+      let(:request) { Request.new(status: 'declined') }
       it 'falseを返す' do
-        expect(request.can_send_to_message?(status)).to be false
+        puts 'ステータス', request.can_send_to_message?
+        expect(request.can_send_to_message?).to be false
       end
     end
-    context 'statusがdeclinedの場合' do
-      let(:status) { 'declined' }
 
+    context 'offeredの場合' do
+      let(:request) { Request.new(status: 'offered') }
       it 'falseを返す' do
-        expect(request.can_send_to_message?(status)).to be false
+        puts 'ステータス', request.can_send_to_message?
+        expect(request.can_send_to_message?).to be false
       end
     end
   end
