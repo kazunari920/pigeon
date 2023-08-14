@@ -6,7 +6,7 @@ class Request < ApplicationRecord
   after_initialize :set_default_status, :if => :new_record?
   validates :shooting_date, :shooting_location, :budget, :address, :phone_number, presence: true
 
-  # 学習用
+  # -----------学習用-----------------
 
   scope :accepted, -> { where(status: 'accepted') }
   scope :newest, -> { order(created_at: :desc) }
@@ -30,7 +30,7 @@ class Request < ApplicationRecord
 
     Request.search(search_word)
   end
-  # ↑ここまで
+  # ↑---------ここまで---------------
 
   def accept(photographer)
     return false unless can_be_accepted_by?(photographer)
