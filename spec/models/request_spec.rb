@@ -128,4 +128,181 @@ RSpec.describe Request, type: :model do
       end
     end
   end
+
+  describe '#rspec_training1' do
+    before do
+      allow(request).to receive(:accepted?).and_return(is_accepted)
+    end
+    context 'acceptedの場合' do
+      let(:is_accepted) { true }
+      it 'trueを返す' do
+        expect(request.rspec_training1).to be true
+      end
+    end
+    context 'acceptedでない場合' do
+      let(:is_accepted) { false }
+      before do
+        allow(request).to receive(:completed?).and_return(is_completed)
+      end
+      context 'completedの場合' do
+        let(:is_completed) { true }
+        it 'trueを返す' do
+          expect(request.rspec_training1).to be true
+        end
+      end
+      context 'completedでない場合' do
+        let(:is_completed) { false }
+        it 'falseを返す' do
+          expect(request.rspec_training1).to be false
+        end
+      end
+    end
+  end
+
+  describe '#rspec_training2' do
+    context 'acceptedがfalseの場合' do
+    end
+    context 'acceptedがtrueの場合' do
+      context 'declinedがfalseの場合' do
+      end
+      context 'declinedがtrueの場合' do
+        context 'completedがfalseの場合' do
+        end
+        context 'completedがtrueの場合' do
+        end
+      end
+    end
+  end
+
+  describe '#rspec_training3' do
+    before do
+      allow(request).to receive(:completed?).and_return(is_completed)
+    end
+    context 'completedがtrueの場合' do
+      let(:is_completed) { true }
+      it 'trueを返す' do
+        expect(request.rspec_training3).to be true
+      end
+    end
+    context 'completedがfalseの場合' do
+      let(:is_completed) { false }
+      before do
+        allow(request).to receive(:accepted?).and_return(is_accepted)
+      end
+      context 'acceptedがfalseの場合' do
+        let(:is_accepted) { false }
+        it 'falseを返す' do
+          expect(request.rspec_training3).to be false
+        end
+      end
+      context 'acceptedがtrueの場合' do
+        let(:is_accepted) { true }
+        before do
+          allow(request).to receive(:declined?).and_return(is_declined)
+        end
+        context 'declinedがfalseの場合' do
+          let(:is_declined) { false }
+          it 'falseを返す' do
+            expect(request.rspec_training3).to be false
+          end
+        end
+        context 'declinedがtrueの場合' do
+          let(:is_declined) { true }
+          it 'trueを返す' do
+            expect(request.rspec_training3).to be true
+          end
+        end
+      end
+    end
+  end
+
+  describe 'scopes' do
+    describe '.accepted' do
+      let!(:accepted_request) { create(:request, status: 'accepted') }
+      before do
+        create(:request, status: 'offered')
+        create(:request, status: 'declined')
+        create(:request, status: 'completed')
+      end
+
+      it 'acceptedのrequestを探す' do
+        expect(Request.accepted).to contain_exactly(accepted_request)
+      end
+
+    end
+
+    describe '.newest' do
+      let!(:first_request) { create(:request, created_at: '2021-01-01 00:00:00') }
+      let!(:second_request) { create(:request, created_at: '2022-01-01 00:00:00') }
+      let!(:third_request) { create(:request, created_at: '2023-01-01 00:00:00') }
+
+      it '新しい順に並べる' do
+        expect(Request.newest).to eq [third_request, second_request, first_request]
+      end
+    end
+
+    describe '.search' do
+      let!(:search_target) { create(:request, shooting_location: '東京') }
+      before do
+        create(:request, shooting_location: '北海道')
+        create(:request, shooting_location: '沖縄')
+      end
+
+      it '東京を探す' do
+        expect(Request.search('東京')).to contain_exactly(search_target)
+      end
+    end
+  end
+
+  describe '.search_by_shooting_location' do
+    subject { described_class.search_by_shooting_location(search_word) }
+    let!(:target_location) { create(:request, shooting_location: '東京') }
+    let!(:wrong_location) { create(:request, shooting_location: '京都') }
+    let!(:wrong_location2) { create(:request, shooting_location: '大阪') }
+
+    context '検索ワードが存在しない場合' do
+      let!(:search_word) { nil }
+      it '全てのrequestを返す' do
+        expect(subject).to contain_exactly(target_location, wrong_location, wrong_location2)
+      end
+    end
+    context '検索ワードが存在した場合' do
+      let!(:search_word) { '東京' }
+      it '検索結果を返す' do
+        expect(subject).to contain_exactly(target_location)
+      end
+    end
+  end
+
+  # 以下教えてもらった方法
+  # describe '#can_send_to_message?' do
+  #   let(:request) { Request.new }
+  #   before do
+  #     allow(request).to receive(:accepted?).and_return(is_accepted)
+  #   end
+  #   context 'acceptedの場合' do
+  #     let(:is_accepted) { true }
+  #     it 'trueを返す' do
+  #       expect(request.can_send_to_message?).to be true
+  #     end
+  #   end
+  #   context 'acceptedでない場合' do
+  #     let(:is_accepted) { false }
+  #     before do
+  #       allow(request).to receive(:completed?).and_return(is_completed)
+  #     end
+  #     context 'completedの場合' do
+  #       let(:is_completed) { true }
+  #       it 'trueを返す' do
+  #         expect(request.can_send_to_message?).to be true
+  #       end
+  #     end
+  #     context 'completedでない場合' do
+  #       let(:is_completed) { false }
+  #       it 'falseを返す' do
+  #         expect(request.can_send_to_message?).to be false
+  #       end
+  #     end
+  #   end
+  # end
 end

@@ -23,10 +23,11 @@ development:
 
 test:
   <<: *default
-  host: <%= ENV['DATABASE_HOST'] %>
-  database: <%= ENV['MYSQL_DATABASE'] %>
-  username: <%= ENV['MYSQL_USER'] %>
-  password: <%= ENV['MYSQL_PASSWORD'] %>
+  host: db
+  database: pigeon_test
+  username: root
+  password: password
+
 production:
   <<: *default
   database: <%= ENV['AWS_RDS_DATABASE_NAME'] %>

@@ -6,6 +6,32 @@ class Request < ApplicationRecord
   after_initialize :set_default_status, :if => :new_record?
   validates :shooting_date, :shooting_location, :budget, :address, :phone_number, presence: true
 
+  # 学習用
+
+  scope :accepted, -> { where(status: 'accepted') }
+  scope :newest, -> { order(created_at: :desc) }
+  scope :search, -> (search) { where('shooting_location LIKE(?)', "%#{search}%") }
+
+  def rspec_training1
+    accepted? || completed?
+  end
+
+  def rspec_training2
+    # ↓本来はありえないが、すべて true の場合があるという仮定でテストを書く。
+    accepted? && declined? && completed?
+  end
+
+  def rspec_training3
+    completed? || accepted? && declined?
+  end
+
+  def self.search_by_shooting_location(search_word)
+    return Request.all unless search_word.present?
+
+    Request.search(search_word)
+  end
+  # ↑ここまで
+
   def accept(photographer)
     return false unless can_be_accepted_by?(photographer)
 
