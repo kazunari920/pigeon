@@ -99,6 +99,7 @@ RSpec.describe Request, type: :model do
     end
   end
 
+  # 一番最初に書いたもの
   describe '#can_send_to_message?' do
     context 'acceptedの場合' do
       let(:request) { Request.new(status: 'accepted') }
@@ -128,4 +129,39 @@ RSpec.describe Request, type: :model do
       end
     end
   end
+
+  # 以下教えてもらった方法で書き直したもの
+  # describe '#can_send_to_message?' do
+  #   subject { request.can_send_to_message? }
+  #   before do
+  #     allow(request).to receive(:accepted?).and_return(is_accepted)
+  #   end
+  #   context 'acceptedの場合' do
+  #     let(:is_accepted) { true }
+
+  #     it 'trueを返す' do
+  #       expect(subject).to be true
+  #     end
+  #   end
+  #   context 'acceptedでない場合' do
+  #     let(:is_accepted) { false }
+  #     before do
+  #       allow(request).to receive(:completed?).and_return(is_completed)
+  #     end
+  #     context 'completedの場合' do
+  #       let(:is_completed) { true }
+
+  #       it 'trueを返す' do
+  #         expect(subject).to be true
+  #       end
+  #     end
+  #     context 'completedでない場合' do
+  #       let(:is_completed) { false }
+
+  #       it 'falseを返す' do
+  #         expect(subject).to be false
+  #       end
+  #     end
+  #   end
+  # end
 end
