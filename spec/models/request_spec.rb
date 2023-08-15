@@ -136,32 +136,69 @@ RSpec.describe Request, type: :model do
   #   before do
   #     allow(request).to receive(:accepted?).and_return(is_accepted)
   #   end
+
   #   context 'acceptedの場合' do
   #     let(:is_accepted) { true }
-
   #     it 'trueを返す' do
   #       expect(subject).to be true
   #     end
   #   end
+
   #   context 'acceptedでない場合' do
   #     let(:is_accepted) { false }
   #     before do
   #       allow(request).to receive(:completed?).and_return(is_completed)
   #     end
+
   #     context 'completedの場合' do
   #       let(:is_completed) { true }
-
   #       it 'trueを返す' do
   #         expect(subject).to be true
   #       end
   #     end
+
   #     context 'completedでない場合' do
   #       let(:is_completed) { false }
-
   #       it 'falseを返す' do
   #         expect(subject).to be false
   #       end
   #     end
   #   end
   # end
+
+  describe '#can_be_accepted_by?' do
+    subject { request.can_be_accepted_by?(photographer) }
+    before do
+      allow(request).to receive(:status).and_return(is_offered)
+    end
+
+    context 'statusがofferedでない場合' do
+      let!(:is_offered) { '' }
+      it 'falseを返す' do
+        expect(subject).to be false
+      end
+    end
+
+    context 'statusがofferedの場合' do
+      before do
+        allow(request).to receive(:photographer_id).and_return(1)
+      end
+      let!(:is_offered) { 'offered' }
+
+      context 'photographerのidが一致する場合' do
+        let!(:photographer) { instance_double('Photographer', id: 1) }
+        it 'trueを返す' do
+          expect(subject).to be true
+        end
+      end
+
+      context 'photographerのidが一致しない場合' do
+        let!(:other_photographer) { instance_double('Photographer', id: 10) }
+        subject { request.can_be_accepted_by?(other_photographer) }
+        it 'falseを返す' do
+          expect(subject).to be false
+        end
+      end
+    end
+  end
 end
