@@ -160,15 +160,49 @@ RSpec.describe Request, type: :model do
   end
 
   describe '#rspec_training2' do
-    context 'acceptedがfalseの場合' do
+    subject {request.rspec_training2}
+    before do
+      allow(request).to receive(:accepted?).and_return(is_accepted)
     end
-    context 'acceptedがtrueの場合' do
-      context 'declinedがfalseの場合' do
+
+    context 'acceptedがfalseの場合' do
+      let(:is_accepted) { false }
+      it 'falseを返す' do
+        expect(subject).to be false
       end
-      context 'declinedがtrueの場合' do
-        context 'completedがfalseの場合' do
+    end
+
+    context 'acceptedがtrueの場合' do
+      let(:is_accepted) { true }
+      before do
+        allow(request).to receive(:declined?).and_return(is_declined)
+      end
+
+      context 'declinedがfalseの場合' do
+        let(:is_declined) { false }
+        it 'falseを返す' do
+          expect(subject).to be false
         end
+      end
+
+      context 'declinedがtrueの場合' do
+        let(:is_declined) { true }
+        before do
+          allow(request).to receive(:completed?).and_return(is_completed)
+        end
+
+        context 'completedがfalseの場合' do
+          let(:is_completed) { false }
+          it 'falseを返す' do
+            expect(subject).to be false
+          end
+        end
+
         context 'completedがtrueの場合' do
+          let(:is_completed) { true }
+          it 'trueを返す' do
+            expect(subject).to be true
+          end
         end
       end
     end
