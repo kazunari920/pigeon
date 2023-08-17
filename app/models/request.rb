@@ -35,7 +35,17 @@ class Request < ApplicationRecord
   def accept(photographer)
     return false unless can_be_accepted_by?(photographer)
 
-    accepted!
+    transaction do
+      accepted!
+      Message.create!(
+        user: self.user,
+        photographer: photographer,
+        request: self,
+        content: photographer.initial_message,
+        from: :photographer
+      )
+    end
+
     true
   end
 
