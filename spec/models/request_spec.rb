@@ -210,7 +210,6 @@ RSpec.describe Request, type: :model do
     context 'ユーザーがアクセスする場合' do
       # この部分がfalseの場合、photographerかどうかの判定に移行すると考えたので
       # 'falseを返す'を削除
-
       let(:request) { create(:request, user: user) }
 
       it 'trueを返す' do
@@ -234,5 +233,14 @@ RSpec.describe Request, type: :model do
         expect(subject).to be false
       end
     end
+    # 14:40 作業開始
+    # 16:27 現在の形に
+    # メソッドの評価順を考えてみて、分岐は３種類かなと考えたので、contextを変更しました
+    # userがtrue→true return
+    # userがfalseでphotographerがtrue→ true return
+    # photographerがfalse→メソッドがfalse return
+    # と考えました
+
+
   end
 end
