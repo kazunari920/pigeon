@@ -201,4 +201,38 @@ RSpec.describe Request, type: :model do
       end
     end
   end
+
+  describe '#accessed_by?' do
+    subject { request.accessed_by?(user, photographer) }
+    let!(:user) { create(:user) }
+    let!(:photographer) { create(:photographer) }
+
+    context 'ユーザーがアクセスする場合' do
+      # この部分がfalseの場合、photographerかどうかの判定に移行すると考えたので
+      # 'falseを返す'を削除
+
+      let(:request) { create(:request, user: user) }
+
+      it 'trueを返す' do
+        expect(subject).to be true
+      end
+    end
+
+    context 'フォトグラファーがアクセスする場合' do
+      # photographerに紐づいたリクエストを作成
+      let(:request) { create(:request, photographer: photographer) }
+      it 'trueを返す' do
+        expect(subject).to be true
+      end
+    end
+
+    context 'ユーザーでもフォトグラファーでもない場合' do
+      # どちらにも紐づいていないrequestを作成
+      let(:request) { create(:request) }
+
+      it 'falseを返す' do
+        expect(subject).to be false
+      end
+    end
+  end
 end
