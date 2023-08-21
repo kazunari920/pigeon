@@ -85,6 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_091453) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.string "initial_message", default: "ご依頼いただき、誠にありがとうございます。"
     t.index ["confirmation_token"], name: "index_photographers_on_confirmation_token", unique: true
     t.index ["email"], name: "index_photographers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_photographers_on_reset_password_token", unique: true
@@ -126,7 +127,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_091453) do
     t.datetime "created_at", precision: nil
     t.string "tenant", limit: 128
     t.index ["context"], name: "index_taggings_on_context"
-    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
     t.index ["taggable_id", "taggable_type", "context"], name: "taggings_taggable_context_idx"
     t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
@@ -144,7 +144,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_091453) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "taggings_count", default: 0
-    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
