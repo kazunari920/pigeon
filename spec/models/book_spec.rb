@@ -34,10 +34,7 @@ RSpec.describe Book, type: :model do
     subject { book.publish! }
 
     context '公開される場合' do
-      before do
-        allow(book).to receive(:published).and_return(false)
-        allow(book).to receive(:publish!).and_return(true)
-      end
+      let!(:book) { create(:book, published: false) }
 
       it 'trueを返す' do
         expect(subject).to be true
@@ -51,5 +48,4 @@ RSpec.describe Book, type: :model do
   context '最近追加された書籍がn冊以上ある場合' do
     let!(:book) { create(:book) }
   end
-
 end
