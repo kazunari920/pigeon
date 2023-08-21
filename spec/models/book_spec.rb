@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
-  let(:book) { instance_double('Book') }
+  let(:book) { described_class.new }
 
   describe 'scopes' do
     describe '.published' do
@@ -42,10 +42,18 @@ RSpec.describe Book, type: :model do
     end
   end
 
-  describe '.recently_added'
-  subject { book.recently_added(n) }
+  describe '.recently_added' do
+    subject { described_class.recently_added(num) }
 
-  context '最近追加された書籍がn冊以上ある場合' do
-    let!(:book) { create(:book) }
+    let!(:book1) { create(:book, created_at: '2021-01-01 00:00:00') }
+    let!(:book2) { create(:book, created_at: '2022-01-01 00:00:00') }
+    let!(:book3) { create(:book, created_at: '2023-01-01 00:00:00') }
+
+    context '最近追加された書籍を取得する場合' do
+      let!(:num) { 3 }
+      it '新しい順に指定された数を取得する' do
+        expect(subject).to eq [book3, book2, book1]
+      end
+    end
   end
 end
