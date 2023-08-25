@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PhotographersController < ApplicationController
-  before_action :authenticate_photographer!, only: %i[edit update]
+  include Authorizer
   before_action :correct_photographer!, only: %i[edit update]
 
   def show
@@ -40,7 +40,7 @@ class PhotographersController < ApplicationController
   private
 
   def photographer_params
-    params.require(:photographer).permit(:name, :description, :email, :your, :other, :attributes, :tag_list)
+    params.require(:photographer).permit(:name, :description, :email, :your, :other, :attributes, :tag_list, :initial_message)
   end
 
   def authenticate_photographer!
