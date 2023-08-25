@@ -6,6 +6,6 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { 'password' }
     password_confirmation { 'password' }
-    # 他の属性もここで定義します
-  end
+    confirmed_at { Time.zone.now }
+    end
 end

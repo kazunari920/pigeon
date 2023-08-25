@@ -1,8 +1,11 @@
 module Users
-  class RequestsController < ApplicationController
+  class RequestsController < ::RequestsController
+    include Authorizer
+    before_action :correct_user!
+
     def show
-      @request = Request.find(params[:id])
-      @user = User.find(params[:user_id])
+      @user = current_user
+      @request = @user.requests.find(params[:id])
     end
   end
 end

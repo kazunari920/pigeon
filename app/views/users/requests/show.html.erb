@@ -1,5 +1,7 @@
 <%= render 'shared/request' %>
 
-<%= link_to 'メッセージ', user_request_messages_path(current_user,@request) %>
+<% if @request.can_send_to_message? %>
+	<%= link_to 'メッセージ', user_request_messages_path(current_user,@request) %>
+<% end %>
 
 <%= link_to '一覧に戻る', requests_path %>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PortfoliosController < ApplicationController
-  before_action :correct_photographer, only: %i[destroy_multiple destroy_form]
+  before_action :correct_photographer!, only: %i[new create destroy_multiple destroy_form]
 
   def new
     @photographer = Photographer.find(params[:photographer_id])
@@ -44,12 +44,5 @@ class PortfoliosController < ApplicationController
 
   def portfolio_params
     params.require(:portfolio).permit(:title, :description, images: [])
-  end
-
-  def correct_photographer
-    @photographer = Photographer.find(params[:photographer_id])
-    return if @photographer == current_photographer
-
-    redirect_to photographer_path(current_photographer)
   end
 end

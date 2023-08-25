@@ -4,7 +4,6 @@ class User < ApplicationRecord
   has_many :likes
   has_many :liked_photographers, through: :likes, source: :photographer
   has_many :requests
-  has_many :requests
   has_many :messages
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

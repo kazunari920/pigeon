@@ -1,7 +1,11 @@
 module Photographers
-    class RequestsController < ApplicationController
-        def show
-          @request = Request.find(params[:id])
-        end
+  class RequestsController < ::RequestsController
+    include Authorizer
+    before_action :correct_photographer!
+
+    def show
+      @photographer = current_photographer
+      @request = @photographer.requests.find(params[:id])
     end
+  end
 end

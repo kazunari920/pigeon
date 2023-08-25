@@ -27,12 +27,42 @@ class Request < ApplicationRecord
     true
   end
 
+  # ↓TODO: 後ほどenumで作り直す
+  # ただしstatusメソッドがあるため、必要なくなる可能性あり
+  # ?をつけるのは慣習的にboolean型のメソッドのみ
+
   def pending?
     status == 'offered'
   end
 
   def accepted?
     status == 'accepted'
+  end
+
+  def completed?
+    status == 'completed'
+  end
+
+  def declined?
+    status == 'declined'
+  end
+  # ↑ここまで
+
+  # ↓TODO: ?をつけるのは慣習的にboolean型のメソッドのみ、後ほど修正
+
+  def status?
+    return 'accepted' if accepted?
+    return 'declined' if declined?
+    return 'completed' if completed?
+
+    'offered'
+  end
+
+  def can_send_to_message?
+    return true if accepted?
+    return true if completed?
+
+    false
   end
 
   def can_be_accepted_by?(photographer)
@@ -45,6 +75,10 @@ class Request < ApplicationRecord
 
   def can_be_completed_by?(photographer)
     status == 'accepted' && photographer.id == photographer_id
+  end
+
+  def accessed_by?(user, photographer)
+    self.user == user || self.photographer == photographer
   end
 
   private

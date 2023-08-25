@@ -2,7 +2,7 @@
 
 class PhotographersController < ApplicationController
   before_action :authenticate_photographer!, only: %i[edit update]
-  before_action :correct_photographer, only: %i[edit update]
+  before_action :correct_photographer!, only: %i[edit update]
 
   def show
     @photographer = Photographer.find_by(id: params[:id])
@@ -46,11 +46,6 @@ class PhotographersController < ApplicationController
   def authenticate_photographer!
     return if photographer_signed_in?
 
-    redirect_to new_photographer_session_path, alert: 'Please sign in to access this page.'
-  end
-
-  def correct_photographer
-    @photographer = Photographer.find(params[:id])
-    redirect_to root_path, alert: 'アクセスが拒否されました' unless current_photographer == @photographer
+    redirect_to new_photographer_session_path, alert: 'ログインしてください'
   end
 end
